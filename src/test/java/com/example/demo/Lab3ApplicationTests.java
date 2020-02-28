@@ -399,6 +399,67 @@ class Lab3ApplicationTests {
         Assertions.assertEquals(tester.deletePost(index), "Your post has been deleted");
     }
 
+    @Test
+    public void happyCreateMessage()
+    {
+        String test = "{\"gamerTag\":\"testGT\",\"userMessage\":\"ExampleMessage\"}";
+
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.APPLICATION_JSON);
+        //header.setBasicAuth("admin","admin");
+        HttpEntity<String> entity = new HttpEntity<>(test,header);
+        TestRestTemplate t = new TestRestTemplate();
+        ResponseEntity<String> r = t.exchange("http://localhost:8080/createMessage", HttpMethod.POST, entity, String.class);
+        Assertions.assertEquals(HttpStatus.OK, r.getStatusCode());
+
+    }
+    @Test
+    public void unhappyCreateMessage()
+    {
+        String test = "{\"gamerTag\":testGT\",bb\"userMessagewfwrefewfe\":\"ExampleMessage\"}";
+
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.APPLICATION_JSON);
+        //header.setBasicAuth("admin","admin");
+        HttpEntity<String> entity = new HttpEntity<>(test,header);
+        TestRestTemplate t = new TestRestTemplate();
+        ResponseEntity<String> r = t.exchange("http://localhost:8080/createMessage", HttpMethod.POST, entity, String.class);
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST, r.getStatusCode());
+
+    }
+    @Test
+    public void happyTestDeleteMessage()
+    {
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.APPLICATION_JSON);
+        //header.setBasicAuth("admin","admin");
+        HttpEntity<String> entity = new HttpEntity<>(header);
+        TestRestTemplate t = new TestRestTemplate();
+        ResponseEntity<String> r = t.exchange("http://localhost:8080/deleteMessage?id=0", HttpMethod.DELETE, entity, String.class);
+        Assertions.assertEquals(HttpStatus.OK, r.getStatusCode());
+    }
+    @Test
+    public void unhappyTestDeleteMessage()
+    {
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.APPLICATION_JSON);
+        //header.setBasicAuth("admin","admin");
+        HttpEntity<String> entity = new HttpEntity<>(header);
+        TestRestTemplate t = new TestRestTemplate();
+        ResponseEntity<String> r = t.exchange("http://localhost:8080/deleteMessage?id=a", HttpMethod.DELETE, entity, String.class);
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST, r.getStatusCode());
+    }
+    @Test
+    public void testGetAllMessages()
+    {
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.APPLICATION_JSON);
+        header.setBasicAuth("admin","admin");
+        HttpEntity<String> entity = new HttpEntity<>(header);
+        TestRestTemplate t = new TestRestTemplate();
+        ResponseEntity<String> r = t.exchange("http://localhost:8080/getAllChat", HttpMethod.GET, entity, String.class);
+        Assertions.assertEquals(HttpStatus.OK, r.getStatusCode());
+    }
 
 
 }

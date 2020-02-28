@@ -22,7 +22,7 @@ public class ChatRoomController {
     }
 
     @DeleteMapping("/deleteMessage")
-    public String deleteUser(@RequestParam(name="id")int id)
+    public String deleteMessage(@RequestParam(name="id")int id)
     {
         ChatRoomChat.remove(id);
         return "Message with id " + id + " has been removed";

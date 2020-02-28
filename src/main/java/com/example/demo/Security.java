@@ -22,6 +22,13 @@ public class Security extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .formLogin().disable();
+        http.httpBasic()
+                .and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/getAllChat").hasRole("ADMIN")
+                .and()
+                .csrf().disable()
+                .formLogin().disable();
        /* http.httpBasic()
                 .and()
                 .authorizeRequests()
