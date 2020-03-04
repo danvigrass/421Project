@@ -9,7 +9,11 @@ public class ChatRoomController {
     ArrayList<ChatRoom> ChatRoomChat = new ArrayList<ChatRoom>();
 
 
-
+    @GetMapping("/getChatUsers")
+    public ArrayList<User> getChatUsers(@RequestParam(name="id")int id)
+    {
+        return ChatRoomChat.get(id).chatters;
+    }
     @GetMapping("/getAllChat")
     public String getAllChat()
     {

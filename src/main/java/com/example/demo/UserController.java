@@ -8,6 +8,12 @@ import java.util.ArrayList;
 public class UserController {
     ArrayList<User> userList = new ArrayList<User>();
 
+    @GetMapping("/getFriends")
+    public ArrayList<User> getFriends(@RequestParam(name="id")int id)
+    {
+        return userList.get(id).friends;
+    }
+
 @GetMapping("/getAllUsers")//repurposed
 public String getAllUsers()
 {

@@ -7,6 +7,7 @@ public class User {
     public int id;
     public String email;
     public ArrayList<Game> games = new ArrayList<Game>();
+    public ArrayList<User> friends = new ArrayList();
 
     public User(String name, int id, String email) {
         this.name = name;
