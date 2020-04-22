@@ -25,22 +25,28 @@ public class rating {
 
     }
 
+    @GetMapping("/review")
+    public String reviewx() {
+        return "Review";
+    }
+
     @PostMapping("Review/newCategory")
     public int createnewgame(@RequestParam(name="Catname") String name){
         if (Reviews.containsKey(name)) {
-            return 2;
+            return 1;
         }
 
         else{
             ArrayList<Review> reviewofgames = new ArrayList<>();
             Reviews.put(name,reviewofgames);
-            return 1;
+            return 2;
         }
 
 
     }
 
-    @PutMapping("Review/Make")
+    @PostMapping("Review/Make")
+    @ResponseBody
     public String createReview(@RequestParam(name ="Gamename") String name, @RequestBody Review review){
 
         if (Reviews.containsKey(name)) {
