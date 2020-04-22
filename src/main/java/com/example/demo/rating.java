@@ -1,11 +1,12 @@
 package com.example.demo;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 //Controller for Review class
-@RestController
+@Controller
 public class rating {
     private HashMap<String, ArrayList> Reviews = new HashMap<>();
 
