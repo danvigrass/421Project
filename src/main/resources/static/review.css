@@ -1,8 +1,8 @@
 body{background-color: antiquewhite;}
 aside{
-    width: 40%;
-    padding-left: 0.7rem;
-    margin-left: 0.7rem;
+    width: 30%;
+    padding-left: 0.9rem;
+    margin-left: 0.9rem;
     float: right;
     position: sticky;
     top: 0;
@@ -11,12 +11,19 @@ aside{
 
 }
 
-p{padding-right: 650px;
+#res{padding-right: 800px;
+    width:300px;
+    Height:200px;
+    display: block;
+    overflow-wrap: break-word ;
+
 }
+
 
 aside>p{margin: 0.5rem;
 }
 
 #Main_Body{
-    background-color: antiquewhite
+    background-color: antiquewhite;
+
 }
