@@ -1,10 +1,11 @@
 package com.example.demo;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 //Controller for NewsHolder class
-@RestController
+@Controller
 public class NewsFeed {
     private ArrayList<NewsHolder> postings;
 
@@ -22,11 +23,13 @@ public class NewsFeed {
     }
 
     @RequestMapping("/getAll")
+    @ResponseBody
     public ArrayList<NewsHolder> getAllPostings() {
         return postings;
     }
 
     @RequestMapping("getPostsFromUser")
+    @ResponseBody
     public ArrayList<NewsHolder> getPostsFromUser(@RequestParam(name="userName") String userName) {
         ArrayList<NewsHolder> result = new ArrayList<>();
         for (NewsHolder item : postings) {
@@ -43,18 +46,21 @@ public class NewsFeed {
     }
 
     @RequestMapping("/newPost")
+    @ResponseBody
     public String newPost(@RequestBody NewsHolder item) {
         postings.add(item);
         return "Your post has been added";
     }
 
     @RequestMapping("/updatePost")
+    @ResponseBody
     public String updatePost(@RequestParam(name="index") int index, @RequestParam(name="newText") String newText) {
         postings.get(index).setMessageBody(newText);
         return "Your post has been updated";
     }
 
     @RequestMapping("/deletePost")
+    @ResponseBody
     public String deletePost(@RequestParam(name="index") int index) {
         postings.remove(index);
         return "Your post has been deleted";

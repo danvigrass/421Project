@@ -1,20 +1,23 @@
 package com.example.demo;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
-@RestController
+@Controller
 public class UserController {
     ArrayList<User> userList = new ArrayList<User>();
 
     @GetMapping("/getFriends")
+    @ResponseBody
     public ArrayList<User> getFriends(@RequestParam(name="id")int id)
     {
         return userList.get(id).friends;
     }
 
 @GetMapping("/getAllUsers")//repurposed
+@ResponseBody
 public String getAllUsers()
 {
     String returner = "";
@@ -26,6 +29,7 @@ public String getAllUsers()
 }
 
     @GetMapping("/getUser")//repurposed
+    @ResponseBody
     public User getUser(@RequestParam(name="id")int val)
     {
         return userList.get(val);
@@ -34,6 +38,7 @@ public String getAllUsers()
 
 
     @PostMapping("/createUser")//repurposed
+    @ResponseBody
     public User createUser(@RequestBody User t)
     {
         userList.add(t);
@@ -41,6 +46,7 @@ public String getAllUsers()
     }
 
     @PutMapping("/updateUser")//repurposed
+    @ResponseBody
     public String updateUser(@RequestBody User detail, @RequestParam(name="id")int id)
     {
         userList.remove(id);
@@ -50,6 +56,7 @@ public String getAllUsers()
 
 
     @DeleteMapping("/deleteUser")//repurposed
+    @ResponseBody
     public String deleteUser(@RequestParam(name="id")int id)
     {
         userList.remove(id);

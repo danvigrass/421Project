@@ -1,0 +1,22 @@
+body{background-color: antiquewhite;}
+aside{
+    width: 40%;
+    padding-left: 0.7rem;
+    margin-left: 0.7rem;
+    float: right;
+    position: sticky;
+    top: 0;
+    border: groove;
+
+
+}
+
+p{padding-right: 650px;
+}
+
+aside>p{margin: 0.5rem;
+}
+
+#Main_Body{
+    background-color: antiquewhite
+}

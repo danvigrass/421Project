@@ -1,20 +1,23 @@
 package com.example.demo;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
-@RestController
+@Controller
 public class ChatRoomController {
     ArrayList<ChatRoom> ChatRoomChat = new ArrayList<ChatRoom>();
 
 
     @GetMapping("/getChatUsers")
+    @ResponseBody
     public ArrayList<User> getChatUsers(@RequestParam(name="id")int id)
     {
         return ChatRoomChat.get(id).chatters;
     }
     @GetMapping("/getAllChat")
+    @ResponseBody
     public String getAllChat()
     {
         String returner = "";
@@ -26,6 +29,7 @@ public class ChatRoomController {
     }
 
     @DeleteMapping("/deleteMessage")
+    @ResponseBody
     public String deleteMessage(@RequestParam(name="id")int id)
     {
         ChatRoomChat.remove(id);
@@ -33,6 +37,7 @@ public class ChatRoomController {
     }
 
     @PostMapping("/createMessage")
+    @ResponseBody
     public ChatRoom createMessage(@RequestBody ChatRoom t)
     {
         ChatRoomChat.add(t);
