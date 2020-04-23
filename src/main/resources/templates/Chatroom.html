@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" type ="text/css" href ="../static/ChatRoomStyle.css"/>
 <style>
     .topnav {
         list-style-type: none;
@@ -29,7 +30,57 @@
     .active {
         background-color: #4CAF50;
     }
+
+    {
+        box-sizing: border-box;
+    }
+
+    .ChatContainer {
+        width: 400px;
+        height: 500px;
+        border: 2px solid #ddd;
+
+    }
+
+    .ChatContainer > .ChatHeader {
+        width: 100%;
+        background: orangered;
+        padding: 5px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .ChatContainer > .ChatHeader h3 {
+        margin:0;
+        padding:0;
+        font-weight: 400;
+        color: white;
+    }
+    .ChatContainer > .chatMessages{
+        height:420px;
+        border-bottom: 11px solid gray;
+        overflow-y:scroll;
+    }
+    .ChatContainer > .chatBottom form input[type ="submit"]{
+        padding: 6px;
+        background:gray;
+        border:1px solid #ddd;
+        cursor:pointer;
+}
+
+    .ChatContainer > .chatBottom form input[type ="text"]{
+        width: 85%;
+        padding:3px;
+        padding-left: 10px;
+        border: 1px solid #ddd;
+        border-radius:5px;
+        margin:5px;
+        height:30px;
+
+    }
+
+
 </style>
+
 <div class="topnav">
 <a  href="Menu.html">Home</a>
 <a href="review.html">Game Reviews</a>
@@ -42,20 +93,24 @@
 <body style="background-color:lightblue;">
 
 <h3><center>WELCOME TO THE CHAT ROOM</center></h3>
+
+
+<center>
 <div class ="ChatContainer">
     <div class ="ChatHeader">
         <h3>Welcome UserNameGoesHere</h3>
     </div>
     <div class="chatMessages"></div>
-    <div class="chatBottom"></div>
 
-    <form action = "#" onSubmit = "return false;"id="chatForm">
-        <input type ='hidden' id ='name';/>
-        <input type ='text' name ='text' id ='text' value=''placeholder='type your chat message'/>
-        <input type ='submit' name='submit' value ='Post'/>
+    <div class="chatBottom">
+    <form action = "#" onSubmit = "return false;" id="chatForm">
+        <input type ="hidden" id ="name";/>
+        <input type ="text" name ="text" id ="text" value=''placeholder="type your chat message"/>
+        <input type ="submit" name="submit" value ="Post"/>
     </form>
-
+    </div>
 </div>
+</center>
 
 
 </body>
