@@ -65,8 +65,8 @@ public String getAllUsers()
 
     public UserController()
     {
-        User d1 = new User("test user", 0, "loveyou@gmail.com");
-        User d2 = new User("test user2", 1, "loveyou2@gmail.com");
+        User d1 = new User("test user", 0, "loveyou@gmail.com", "test");
+        User d2 = new User("test user2", 1, "loveyou2@gmail.com", "test");
         userList.add(d1);
         userList.add(d2);
 

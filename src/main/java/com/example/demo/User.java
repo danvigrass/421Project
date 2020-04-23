@@ -6,13 +6,15 @@ public class User {
     public String name;
     public int id;
     public String email;
+    public String password;
     public ArrayList<Game> games = new ArrayList<Game>();
     public ArrayList<User> friends = new ArrayList();
 
-    public User(String name, int id, String email) {
+    public User(String name, int id, String email, String pw) {
         this.name = name;
         this.id = id;
         this.email = email;
+        this.password = pw;
     }
 
     public String getName() {
