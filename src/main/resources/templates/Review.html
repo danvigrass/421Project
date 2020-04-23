@@ -25,8 +25,9 @@
             <label>rating: <input type="number" ID="Rating"> <button type="button" id="button1">Post</button></label>
         </form>
     </aside>
+    <p>
     <p id="res"></p>
-
+    </p>
 </div>
 
 <script>
@@ -46,7 +47,7 @@
         type: "post",
         contentType: 'application/json',
         success: function(data){
-            $("#res").append(data);
+
             return alert(data);
 
         }
@@ -100,7 +101,8 @@
             contentType: 'application/json',
             success: function(data){
                 alert(JSON.stringify(data));
-                $("#res").append(JSON.stringify(data));
+                document.getElementById("res").textContent=JSON.stringify(data);
+                //$("#res").append(JSON.stringify(data));
 
 
             }
