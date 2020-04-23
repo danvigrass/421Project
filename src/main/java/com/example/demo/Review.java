@@ -6,6 +6,7 @@ public class Review {
     public String Text_writing;
     public String Game_Title;
 
+
     public int getUserID() {
         return UserID;
     }

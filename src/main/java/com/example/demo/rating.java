@@ -12,6 +12,7 @@ public class rating {
 
     //gets reviews for a game, type name of game as Catname param
     @GetMapping("Review/Get/Category")
+    @ResponseBody
     public ArrayList<Review> getReviewsofgames(@RequestParam(name="Catname") String name) {
         if (Reviews.containsKey(name)) {
             ArrayList<Review> game =Reviews.get(name);
@@ -31,6 +32,7 @@ public class rating {
     }
 
     @PostMapping("Review/newCategory")
+    @ResponseBody
     public int createnewgame(@RequestParam(name="Catname") String name){
         if (Reviews.containsKey(name)) {
             return 1;
@@ -65,6 +67,7 @@ public class rating {
 
 
     @DeleteMapping("Review/Delete/Category")
+    @ResponseBody
     public String deleteReview(@RequestParam (name="Catname") String name){
         if (Reviews.containsKey(name)) {
             Reviews.remove(name);

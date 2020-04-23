@@ -30,6 +30,30 @@
 </div>
 
 <script>
+    $.ajax({
+        url: ("Review/newCategory")+"?Catname="+"World_Of_War",
+        type: "post",
+        contentType: 'application/json',
+        success: function(data){
+            $("#res").innerText=data;
+            return alert(data);
+
+        }
+    });
+
+    $.ajax({
+        url: ("Review/newCategory")+"?Catname="+"League_of_Legends",
+        type: "post",
+        contentType: 'application/json',
+        success: function(data){
+            $("#res").append(data);
+            return alert(data);
+
+        }
+    });
+
+
+
 
     function getFormString() {
         var jsonStr = '';
@@ -68,14 +92,16 @@
     });
 
     $("#button").click(function () {
-        console.log(getFormString());
+
         $.ajax({
-            url: $("#f1").attr("action")+"?Gamename="+$("#Game_name").val(),
+            url: $("#f1").attr("action")+"?Catname="+$("#answer").val(),
             type: $("#f1").attr("method"),
 
             contentType: 'application/json',
             success: function(data){
-                return alert(data);
+                alert(JSON.stringify(data));
+                $("#res").append(JSON.stringify(data));
+
 
             }
         });
