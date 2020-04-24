@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="../static/NewsfeedStyle.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/NewsfeedStyle.css}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style>
         .topnav {
@@ -36,25 +36,26 @@
     </style>
     <div class="topnav">
         <a  href="Menu.html">Home</a>
-        <a href="Review.html">Game Reviews</a>
-        <a class="active" href="Newsfeed.html">Newsfeed</a>
-        <a href="Chatroom.html">Chatrooms</a>
+        <a href="/review">Game Reviews</a>
+        <a class="active" href="/newsFeed">Newsfeed</a>
+        <a href="/chatroom">Chatrooms</a>
     </div>
 </head>
 <body>
 <form id="formGetPost" th:action="@{Newsfeed/GetPostByName}" method="get">
-    <label>Get posts from a user: <input type="text" ID="answer"> <button type="button" id="button">Search</button></label>
+    <label>Get posts from a user: <input type="text" id="name"> <button type="button" id="searchButton">Search</button></label>
 </form>
 
 <form id="formShowAllPosts" th:action="@{Newsfeed/GetAll}" method="get">
-    <button type="submit" id="showAllButton">Show All Posts</button>
+    <button type="button" id="showAllButton">Show All Posts</button>
 </form>
 
 <div>Create a new post</div>
 <form id="formCreatePost" th:action="@{Newsfeed/CreatePost}" method="post">
-    <label>Your name: <input type="text" id="authorText"> </label>
+    <label>Your name: <input type="text" id="postAuthor"> </label>
     <div></div>
     <label>What would you like to say?: <input type="text" id="postBody"></label>
+    <label>Enter your ID: <input type="text" id="postID"></label>
 </form>
 
 <div class="newsHolder">
@@ -85,7 +86,7 @@
 </div>
 
 <script>
-    function getAllPostings(data) {
+    /*function getAllPostings(data) {
         let htmlString = ""
         for (let i in data) {
             htmlString += "<div class='newsHolder'>"
@@ -102,7 +103,24 @@
         }
         let container = DOM.getElementById("newsHolder")
         container.innerHTML = htmlString
+    }*/
+
+    function getFormString() {
+        let jsonStr = '';
+        jsonStr += '{';
+        jsonStr += '"ID": ';
+        jsonStr += $("#postID").val() ;
+        jsonStr += ',';
+        jsonStr += '"userName": "';
+        jsonStr += $("#postAuthor").val() ;
+        jsonStr += '",';
+        jsonStr += '"messageBody": "';
+        jsonStr += $("#postBody").val() ;
+        jsonStr += '"}'
+        return  jsonStr;
     }
+
+
 </script>
 
 </body>
