@@ -45,9 +45,9 @@ public class NewsFeed {
         }
     }
 
-    @GetMapping("/newsFeed")
+    @GetMapping("/NewsFeed")
     public String newsFeed() {
-        return "newsFeed";
+        return "NewsFeed";
     }
 
     @RequestMapping("NewsFeed/CreatePost")
