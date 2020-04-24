@@ -37,7 +37,7 @@
     <div class="topnav">
         <a  href="Menu.html">Home</a>
         <a href="/review">Game Reviews</a>
-        <a class="active" href="/newsFeed">Newsfeed</a>
+        <a class="active" href="/NewsFeed">Newsfeed</a>
         <a href="/chatroom">Chatrooms</a>
     </div>
 </head>
@@ -77,7 +77,7 @@
     </div>
     <div class="newsPost">
         <strong>Someone Else</strong>
-        <p>I have no clue how to hook up to the backend</p>
+        <p>I have no clue why backend is 404</p>
         <p class="num">3</p>
     </div>
 </div>
@@ -126,7 +126,7 @@
             url: $("#formCreatePost").attr("action")+"?item="+getFormString(),
             type: $("#formCreatePost").attr("method"),
             contentType: 'application/json',
-            success: function (data) {
+            success: function(data){
                 console.log(data)
             }
         });
@@ -136,6 +136,17 @@
         $.ajax({
             url: $("#formShowAllPosts").attr("action"),
             method: $("#formShowAllPosts").attr("method"),
+            contentType: 'application/json',
+            success: function (data) {
+                console.log(data)
+            }
+        });
+    });
+
+    $("#searchButton").click(function () {
+        $.ajax({
+            url: $("#formGetPost").attr("action") + "?userName=" + $("#name").val(),
+            method: $("#formGetPost").attr("method"),
             contentType: 'application/json',
             success: function (data) {
                 console.log(data)
