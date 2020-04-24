@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    var x = document.getElementById("addFriends");
+    new XMLHttpRequest()
+    let data = {'name':x[0],'email':x[1],'password':x[2]};
+    $.ajax({
+        url: "Http://localhost:8080/addFriend/"+ x[0],
+        type: 'POST',
+        crossDomain:true,
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: (data) => {
+            console.log(data);
+        },
+        error: (er) => {
+            console.log(er);
+        }
+
+
+    });
+    </script>
+<form action="/addFriend" id="addFriends">
+    <label for="addf">Add friend: </label>
+    <input id="addf" placeholder="Username" type="text">
+    <input type="submit" id="sub" text="Add">
+</form>
+
+</body>
+</html>
