@@ -4,13 +4,42 @@
     <link rel="stylesheet" type ="text/css" th:href ="@{/ChatRoomStyle.css}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+    <style>
+        .topnav {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
 
-<div class="topnav">
-<a  href="/friends">Friends</a>
-<a href="/review">Game Reviews</a>
-<a href="/NewsFeed">Newsfeed</a>
-<a class="active" href="/chatroom">Chatrooms</a>
-</div>
+        .topnav a{
+            float: left;
+        }
+
+        .topnav a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .topnav a:hover:not(.active) {
+            background-color: #111;
+        }
+
+        .active {
+            background-color: #4CAF50;
+        }
+    </style>
+    <div class="topnav">
+        <a  href="/menu">Home</a>
+        <a href="/review">Game Reviews</a>
+        <a  href="/NewsFeed">Newsfeed</a>
+        <a class="active" href="/chatroom">Chatrooms</a>
+        <a  href="/friends">Friends</a>
+    </div>
 </head>
 <body style="background-color:#99aab5;">
 
@@ -19,10 +48,15 @@
         <h3>Welcome CurrentUser to the chatroom</h3>
 
 
-        <form action="/chatroom/newUser" id="newuser">
+        <form action="/chatroom/newUser" id="newuser" method="post">
             <input type ="text" name ="name" id ="text2" placeholder="Enter a gamertag to add user to the chat"/>
-            <input type ="submit"  value ="add"/>
+            <input type ="submit"  value ="Search" text="Add"/>
         </form>
+
+       <form action="/chatroom/getChatUsers" id="getUsers" method="get">
+           <input type="submit" value="Show User List">
+
+       </form>
 
         
     </div>

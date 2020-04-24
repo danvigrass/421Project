@@ -24,11 +24,9 @@
         error: (er) => {
             console.log(er);
         }
-
-
     });
 </script>
-<form action="/createUser" id="register">
+<form action="/createUser" id="register" method="post">
     <label for="un">Username:</label><br>
     <input type="text" id="un" name="un"><br>
     <label for="em">Email:</label><br>

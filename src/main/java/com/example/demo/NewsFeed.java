@@ -70,5 +70,4 @@ public class NewsFeed {
         postings.remove(index);
         return "Your post has been deleted";
     }
-
 }

@@ -26,9 +26,8 @@ public class ChatRoomController {
 
     @GetMapping("chatroom/getChatUsers")
     @ResponseBody
-    public ArrayList<String> getChatUsers(@RequestParam(name="id")int id)
+    public ArrayList<String> getChatUsers()
     {
-
         return userList;
     }
 

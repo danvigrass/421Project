@@ -8,10 +8,10 @@ import java.util.ArrayList;
 @Controller
 public class UserController {
     ArrayList<User> userList = new ArrayList<User>();
-    ArrayList<User> friendList = new ArrayList();
+    ArrayList<String> friendList = new ArrayList();
     @GetMapping("/getFriends")
     @ResponseBody
-    public ArrayList<User> getFriends()
+    public ArrayList<String> getFriends()
     {
         return friendList;
     }
@@ -20,18 +20,12 @@ public class UserController {
     public String friends() {
         return "friends";
     }
-    @PutMapping("/addFriend")
+    @PostMapping("/addFriend")
     @ResponseBody
-    public ArrayList<User> addFriend(@RequestParam(name="name")String name)
+    public ArrayList<String> addFriend(@RequestParam(name="name")String name)
     {
+        friendList.add(name);
 
-        for(int i=0;i<userList.size();i++)
-        {
-            if(userList.get(i).name == name)
-            {
-                friendList.add(userList.get(i));
-            }
-        }
         return friendList;
     }
     @GetMapping("/login")
