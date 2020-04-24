@@ -1,3 +1,15 @@
 .newsPost {
     border: solid black 1px;
 }
+
+body {
+    background: #99AAB5;
+}
+
+.num {
+    font-size: small;
+}
+
+.newsPost:hover {
+    color: blue;
+}
