@@ -53,11 +53,19 @@
             <div>Would You like to Write a review</div>
             <label>Game Name: <input type="text" ID="Game_name"> </label>
             <div></div>
-            <label>User Name: <input type="number" ID="User"> </label>
+            <label>User ID: <input type="number" ID="User"> </label>
             <div></div>
             <label>Review: <input type="text" ID="Review_name"> </label>
             <div></div>
             <label>rating: <input type="number" ID="Rating"> <button type="button" id="button1">Post</button></label>
+        </form>
+        <div>----------------------------------------------------------</div>
+        <form id="f3" th:action="@{Review/newCategory}" method="post">
+            <label>Create: <input type="text" ID="newcat"> <button type="button" id="button2">Create</button></label>
+        </form>
+        <div>----------------------------------------------------------</div>
+        <form id="f4" th:action="@{Review/Delete/Category}" method="delete">
+            <label>Delete: <input type="text" ID="Deleter"> <button type="button" id="button3">Delete</button></label>
         </form>
     </aside>
     <p>
@@ -95,7 +103,7 @@
         var jsonStr = '';
         jsonStr += '{';
         jsonStr += '"UserID": ';
-        //jsonStr += ${User.id};
+
         jsonStr += $("#User").val() ;
         jsonStr += ',';
         jsonStr +='"Rating": ';
@@ -133,6 +141,40 @@
         $.ajax({
             url: $("#f1").attr("action")+"?Catname="+$("#answer").val(),
             type: $("#f1").attr("method"),
+
+            contentType: 'application/json',
+            success: function(data){
+                document.getElementById("res").textContent=JSON.stringify(data);
+                //$("#res").append(JSON.stringify(data));
+
+
+            }
+        });
+
+    });
+
+    $("#button2").click(function () {
+
+        $.ajax({
+            url: $("#f3").attr("action")+"?Catname="+$("#newcat").val(),
+            type: $("#f3").attr("method"),
+
+            contentType: 'application/json',
+            success: function(data){
+
+                //$("#res").append(JSON.stringify(data));
+
+
+            }
+        });
+
+    });
+
+    $("#button3").click(function () {
+
+        $.ajax({
+            url: $("#f4").attr("action")+"?Catname="+$("#Deleter").val(),
+            type: $("#f4").attr("method"),
 
             contentType: 'application/json',
             success: function(data){
