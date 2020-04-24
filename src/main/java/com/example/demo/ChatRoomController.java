@@ -10,6 +10,11 @@ public class ChatRoomController {
     ArrayList<ChatRoom> ChatRoomChat = new ArrayList<ChatRoom>();
 
 
+    @GetMapping("/chatroom")
+    public String openChat() {
+        return "Chatroom";
+    }
+
     @GetMapping("/getChatUsers")
     @ResponseBody
     public ArrayList<User> getChatUsers(@RequestParam(name="id")int id)

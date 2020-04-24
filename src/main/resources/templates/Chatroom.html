@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" type ="text/css" href ="../static/ChatRoomStyle.css"/>
+    <link rel="stylesheet" type ="text/css" th:href ="@{/ChatRoomStyle.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
     .topnav {
         list-style-type: none;
@@ -34,53 +35,6 @@
     {
         box-sizing: border-box;
     }
-
-    .ChatContainer {
-        width: 800px;
-        height: 500px;
-        border: 2px solid #ddd;
-
-    }
-
-    .ChatContainer > .ChatHeader {
-        width: 100%;
-        background: orangered;
-        padding: 5px;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .ChatContainer > .ChatHeader h3 {
-        margin:0;
-        padding:0;
-        font-weight: 400;
-        color: white;
-    }
-    .ChatContainer > .chatMessages{
-        height:420px;
-        border-bottom: 11px solid gray;
-        margin-left: auto;
-        overflow-y:scroll;
-    }
-    .ChatContainer > .chatBottom form input[type ="submit"]{
-        width:7%;
-        padding: 9px;
-        background:gray;
-        border:1px solid #ddd;
-        cursor:pointer;
-}
-
-    .ChatContainer > .chatBottom form input[type ="text"]{
-        width: 90%;
-        padding:3px;
-        padding-left: 1px;
-        border: 1px solid #ddd;
-        border-radius:5px;]
-        margin:8px;
-        height:30px;
-
-    }
-
-
 </style>
 
 <div class="topnav">
@@ -92,21 +46,16 @@
 </head>
 
 
-<body style="background-color:lightblue;">
-
-
-
+<body style="background-color:#99aab5;">
 
 <div class ="ChatContainer">
     <div class ="ChatHeader">
         <h3>Welcome UserNameGoesHere to the chatroom</h3>
     </div>
+
     <div class="chatMessages">
-
         <ul id="list" >
-
         </ul>
-
     </div>
 
     <div class="chatBottom">
@@ -119,16 +68,17 @@
         <script>
             function addLi()
             {
-
-                var txtVal = document.getElementById('text').value,
-
+                var txtVal = document.getElementById('text').value;
+                if(txtVal ===""){
+                    alert("please enter data into the field.")
+            }else {
                     listNode = document.getElementById('list'),
-                    liNode = document.createElement("LI"),
-                    txtNode = document.createTextNode(text.value);
-
-                liNode.appendChild(txtNode);
-                listNode.appendChild(liNode);
-
+                        liNode = document.createElement("LI"),
+                        txtNode = document.createTextNode(text.value);
+                    liNode.appendChild(txtNode);
+                    listNode.appendChild(liNode);
+                    document.getElementById('text').value ="";
+                }
             }
         </script>
     </div>
