@@ -12,4 +12,5 @@ body {
 
 .newsPost:hover {
     color: blue;
+    font-size: larger;
 }
