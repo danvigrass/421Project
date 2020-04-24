@@ -36,7 +36,7 @@
     </style>
     <div class="topnav">
         <a  href="Menu.html">Home</a>
-        <a class="active" href="review.html">Game Reviews</a>
+        <a class="active" href="review">Game Reviews</a>
         <a href="Newsfeed.html">Newsfeed</a>
         <a href="Chatroom.html">Chatrooms</a>
     </div>
@@ -67,23 +67,23 @@
 
 <script>
     $.ajax({
-        url: ("Review/newCategory")+"?Catname="+"World_Of_War",
+        url: ("Review/newCategory")+"?Catname="+"world_of_war",
         type: "post",
         contentType: 'application/json',
         success: function(data){
-            $("#res").innerText=data;
-            return alert(data);
+
+
 
         }
     });
 
     $.ajax({
-        url: ("Review/newCategory")+"?Catname="+"League_of_Legends",
+        url: ("Review/newCategory")+"?Catname="+"league_of_legends",
         type: "post",
         contentType: 'application/json',
         success: function(data){
 
-            return alert(data);
+
 
         }
     });
@@ -95,6 +95,7 @@
         var jsonStr = '';
         jsonStr += '{';
         jsonStr += '"UserID": ';
+        //jsonStr += ${User.id};
         jsonStr += $("#User").val() ;
         jsonStr += ',';
         jsonStr +='"Rating": ';
@@ -135,7 +136,6 @@
 
             contentType: 'application/json',
             success: function(data){
-                alert(JSON.stringify(data));
                 document.getElementById("res").textContent=JSON.stringify(data);
                 //$("#res").append(JSON.stringify(data));
 

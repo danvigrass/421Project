@@ -1,4 +1,4 @@
-body{background-color: antiquewhite;}
+body{background-color: lightblue;}
 aside{
     width: 30%;
     padding-left: 0.9rem;
@@ -12,11 +12,12 @@ aside{
 }
 
 #res{padding-right: 800px;
-    width:300px;
+    width:700px;
     Height:200px;
     display: block;
     overflow-wrap: break-word ;
-
+    line-height: 30px;
+   
 }
 
 
@@ -24,6 +25,6 @@ aside>p{margin: 0.5rem;
 }
 
 #Main_Body{
-    background-color: antiquewhite;
+    background-color: lightblue;
 
 }
