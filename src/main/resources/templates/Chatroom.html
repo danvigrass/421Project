@@ -3,69 +3,47 @@
 <head>
     <link rel="stylesheet" type ="text/css" th:href ="@{/ChatRoomStyle.css}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<style>
-    .topnav {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #333;
-    }
 
-    .topnav a{
-        float: left;
-    }
-
-    .topnav a {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-    }
-
-    .topnav a:hover:not(.active) {
-        background-color: #111;
-    }
-
-    .active {
-        background-color: #4CAF50;
-    }
-
-    {
-        box-sizing: border-box;
-    }
-</style>
 
 <div class="topnav">
-<a  href="Menu.html">Home</a>
-<a href="review.html">Game Reviews</a>
+<a  href="/friends">Friends</a>
+<a href="/review">Game Reviews</a>
 <a href="/NewsFeed">Newsfeed</a>
-<a class="active" href="Chatroom.html">Chatrooms</a>
+<a class="active" href="/chatroom">Chatrooms</a>
 </div>
 </head>
-
-
 <body style="background-color:#99aab5;">
 
 <div class ="ChatContainer">
     <div class ="ChatHeader">
-        <h3>Welcome UserNameGoesHere to the chatroom</h3>
-    </div>
+        <h3>Welcome CurrentUser to the chatroom</h3>
 
+
+        <form action="/chatroom/newUser" id="newuser">
+            <input type ="text" name ="name" id ="text2" placeholder="Enter a gamertag to add user to the chat"/>
+            <input type ="submit"  value ="add"/>
+        </form>
+
+        
+    </div>
     <div class="chatMessages">
         <ul id="list" >
         </ul>
     </div>
 
+
     <div class="chatBottom">
+
     <form action = "#" onSubmit = "return false;" id="chatForm">
         <input type ="hidden" id ="name";/>
         <input type ="text" name ="text" id ="text" value=''placeholder="type your chat message"/>
         <input type ="submit" onclick="addLi()" name="submit" value ="Post"/>
+
+
     </form>
 
         <script>
+
             function addLi()
             {
                 var txtVal = document.getElementById('text').value;
@@ -74,7 +52,7 @@
             }else {
                     listNode = document.getElementById('list'),
                         liNode = document.createElement("LI"),
-                        txtNode = document.createTextNode(text.value);
+                        txtNode = document.createTextNode("<CurrentUser> " + text.value);
                     liNode.appendChild(txtNode);
                     listNode.appendChild(liNode);
                     document.getElementById('text').value ="";
@@ -83,10 +61,5 @@
         </script>
     </div>
 </div>
-
-
-
-
 </body>
-
 </html>

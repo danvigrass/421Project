@@ -1,3 +1,35 @@
+.topnav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.topnav a{
+    float: left;
+}
+
+.topnav a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.topnav a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+
+{
+    box-sizing: border-box;
+}
+
 .ChatContainer {
     width: 800px;
     height: 500px;
@@ -6,7 +38,7 @@
 }
 
 .ChatContainer > .ChatHeader {
-    width: 100%;
+    width: 98.7%;
     background: orangered;
     padding: 5px;
     border-bottom: 1px solid #ddd;
@@ -25,7 +57,7 @@
     overflow-y:scroll;
 }
 .ChatContainer > .chatBottom form input[type ="submit"]{
-    width:7%;
+    width:8.7%;
     padding: 9px;
     background:gray;
     border:1px solid #ddd;

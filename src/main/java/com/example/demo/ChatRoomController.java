@@ -8,6 +8,7 @@ import java.util.ArrayList;
 @Controller
 public class ChatRoomController {
     ArrayList<ChatRoom> ChatRoomChat = new ArrayList<ChatRoom>();
+    ArrayList<String> userList = new ArrayList<>();
 
 
     @GetMapping("/chatroom")
@@ -15,13 +16,31 @@ public class ChatRoomController {
         return "Chatroom";
     }
 
-    @GetMapping("/getChatUsers")
+    @PostMapping("chatroom/newUser")
     @ResponseBody
-    public ArrayList<User> getChatUsers(@RequestParam(name="id")int id)
+    public ArrayList<String> NewUser(@RequestParam(name="name")String name)
     {
-        return ChatRoomChat.get(id).chatters;
+        userList.add(name);
+        return userList;
     }
-    @GetMapping("/getAllChat")
+
+    @GetMapping("chatroom/getChatUsers")
+    @ResponseBody
+    public ArrayList<String> getChatUsers(@RequestParam(name="id")int id)
+    {
+
+        return userList;
+    }
+
+    @GetMapping("chatroom/getChatUser")
+    @ResponseBody
+    public String getChatUser(@RequestParam(name="id")int id)
+    {
+
+        return userList.get(id);
+    }
+
+    @GetMapping("chatroom/getAllChat")
     @ResponseBody
     public String getAllChat()
     {
@@ -33,7 +52,7 @@ public class ChatRoomController {
         return returner;
     }
 
-    @DeleteMapping("/deleteMessage")
+    @DeleteMapping("chatroom/deleteMessage")
     @ResponseBody
     public String deleteMessage(@RequestParam(name="id")int id)
     {
@@ -41,12 +60,18 @@ public class ChatRoomController {
         return "Message with id " + id + " has been removed";
     }
 
-    @PostMapping("/createMessage")
+    @PostMapping("chatroom/createMessage")
     @ResponseBody
-    public ChatRoom createMessage(@RequestBody ChatRoom t)
+    public String createMessage(@RequestParam (name="text")String text)
     {
-        ChatRoomChat.add(t);
-        return t;
+        if(text=="")
+        {
+            return "";
+        }
+        else
+        {
+            return text;
+        }
     }
 
     public ChatRoomController()
