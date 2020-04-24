@@ -36,7 +36,7 @@
     }
 
     .ChatContainer {
-        width: 400px;
+        width: 800px;
         height: 500px;
         border: 2px solid #ddd;
 
@@ -58,22 +58,24 @@
     .ChatContainer > .chatMessages{
         height:420px;
         border-bottom: 11px solid gray;
+        margin-left: auto;
         overflow-y:scroll;
     }
     .ChatContainer > .chatBottom form input[type ="submit"]{
-        padding: 6px;
+        width:7%;
+        padding: 9px;
         background:gray;
         border:1px solid #ddd;
         cursor:pointer;
 }
 
     .ChatContainer > .chatBottom form input[type ="text"]{
-        width: 85%;
+        width: 90%;
         padding:3px;
-        padding-left: 10px;
+        padding-left: 1px;
         border: 1px solid #ddd;
-        border-radius:5px;
-        margin:5px;
+        border-radius:5px;]
+        margin:8px;
         height:30px;
 
     }
@@ -92,26 +94,49 @@
 
 <body style="background-color:lightblue;">
 
-<h3><center>WELCOME TO THE CHAT ROOM</center></h3>
 
 
-<center>
+
 <div class ="ChatContainer">
     <div class ="ChatHeader">
-        <h3>Welcome UserNameGoesHere</h3>
+        <h3>Welcome UserNameGoesHere to the chatroom</h3>
     </div>
-    <div class="chatMessages"></div>
+    <div class="chatMessages">
+
+        <ul id="list" >
+
+        </ul>
+
+    </div>
 
     <div class="chatBottom">
     <form action = "#" onSubmit = "return false;" id="chatForm">
         <input type ="hidden" id ="name";/>
         <input type ="text" name ="text" id ="text" value=''placeholder="type your chat message"/>
-        <input type ="submit" name="submit" value ="Post"/>
+        <input type ="submit" onclick="addLi()" name="submit" value ="Post"/>
     </form>
+
+        <script>
+            function addLi()
+            {
+
+                var txtVal = document.getElementById('text').value,
+
+                    listNode = document.getElementById('list'),
+                    liNode = document.createElement("LI"),
+                    txtNode = document.createTextNode(text.value);
+
+                liNode.appendChild(txtNode);
+                listNode.appendChild(liNode);
+
+            }
+        </script>
     </div>
 </div>
-</center>
+
+
 
 
 </body>
+
 </html>
