@@ -42,6 +42,21 @@ public class UserController {
     public String register(){
         return "register";
     }
+    @GetMapping("/login/send")
+    @ResponseBody
+    public boolean loginSend(@RequestParam(name="un") String un, @RequestParam(name="pw")String pw)
+    {
+        boolean returner = false;
+        for(int i=0;i<userList.size();i++)
+        {
+
+            if(userList.get(i).name == un && userList.get(i).password == pw)
+            {
+                returner = true;
+            }
+        }
+        return returner;
+    }
 
 @GetMapping("/getAllUsers")//repurposed
 @ResponseBody
@@ -95,8 +110,10 @@ public String getAllUsers()
     {
         User d1 = new User("d",  "loveyou@gmail.com", "test");
         User d2 = new User("testuser2",  "loveyou2@gmail.com", "test");
+        User d3 = new User("t", "t", "t");
         userList.add(d1);
         userList.add(d2);
+        userList.add(d3);
 
     }//curl -X POST -d '{}' -u admin:admin http://localhost:8080/changemenu
     //curl -X POST -d '{"type":"test","priceEach":6.0,"description":"test description"}' -u admin:admin https://localhost:8443/createCategory
