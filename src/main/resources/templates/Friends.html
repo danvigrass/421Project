@@ -26,6 +26,22 @@
 
     });
     </script>-->
+<script type="text/javascript">//to show list of friends when add is clicked
+    $('#sub').click(function() {
+        console.log(getFormString());
+        $.ajax({
+            url: "Http://localhost:8080/getFriends",
+            type: 'GET',
+            data: getFormString(),
+            // headers:{"Gamername":$("#Game_name").val()},
+            contentType: 'application/json',
+            success: function(data){
+                return alert(data);
+
+            }
+        });
+    });
+</script>
 <form action="/addFriend" id="addFriends">
     <label for="addf">Add friend: </label>
     <input id="addf" placeholder="Username" name="name" type="text">

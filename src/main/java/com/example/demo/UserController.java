@@ -11,9 +11,9 @@ public class UserController {
     ArrayList<User> friendList = new ArrayList();
     @GetMapping("/getFriends")
     @ResponseBody
-    public ArrayList<User> getFriends(@RequestParam(name="id")int id)
+    public ArrayList<User> getFriends()
     {
-        return userList.get(id).friends;
+        return friendList;
     }
 
     @GetMapping("/friends")
