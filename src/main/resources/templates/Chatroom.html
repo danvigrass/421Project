@@ -49,7 +49,7 @@
 
 <!----EP1------->
         <form th:action="@{/chatroom/newUser}" id="newuser" method="post">
-            <input type ="text" name ="name" id ="text2" placeholder="Enter a gamertag to add user to the chat"/>
+            <input type ="text" name ="name" id ="text2" placeholder="Add a User"/>
             <input type ="button"  id ="button1" value ="Add" />
         </form>
 <script>
@@ -73,7 +73,7 @@
 
 <!----EP3------->
         <form th:action="@{/chatroom/removeUser}" id="removeUser" method="delete">
-            <input type ="text" name ="name" id ="text3" placeholder="Enter the name of the user you want removed from the chat"/>
+            <input type ="text" name ="name" id ="text3" placeholder="Remove a User"/>
             <input type="button" id="button2" value="remove">
         </form>
 
