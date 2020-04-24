@@ -22,13 +22,13 @@ public class NewsFeed {
         postings.add(item3);
     }
 
-    @RequestMapping("/getAll")
+    @RequestMapping("NewsFeed/GetAll")
     @ResponseBody
     public ArrayList<NewsHolder> getAllPostings() {
         return postings;
     }
 
-    @RequestMapping("getPostsFromUser")
+    @RequestMapping("NewsFeed/GetPostByName")
     @ResponseBody
     public ArrayList<NewsHolder> getPostsFromUser(@RequestParam(name="userName") String userName) {
         ArrayList<NewsHolder> result = new ArrayList<>();
@@ -45,21 +45,21 @@ public class NewsFeed {
         }
     }
 
-    @RequestMapping("/newPost")
+    @RequestMapping("NewsFeed/CreatePost")
     @ResponseBody
     public String newPost(@RequestBody NewsHolder item) {
         postings.add(item);
         return "Your post has been added";
     }
 
-    @RequestMapping("/updatePost")
+    @RequestMapping("NewsFeed/UpdatePost")
     @ResponseBody
     public String updatePost(@RequestParam(name="index") int index, @RequestParam(name="newText") String newText) {
         postings.get(index).setMessageBody(newText);
         return "Your post has been updated";
     }
 
-    @RequestMapping("/deletePost")
+    @RequestMapping("NewsFeed/DeletePost")
     @ResponseBody
     public String deletePost(@RequestParam(name="index") int index) {
         postings.remove(index);
