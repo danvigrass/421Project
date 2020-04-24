@@ -8,7 +8,7 @@ import java.util.ArrayList;
 @Controller
 public class UserController {
     ArrayList<User> userList = new ArrayList<User>();
-
+    ArrayList<User> friendList = new ArrayList();
     @GetMapping("/getFriends")
     @ResponseBody
     public ArrayList<User> getFriends(@RequestParam(name="id")int id)
@@ -61,6 +61,21 @@ public String getAllUsers()
     {
         userList.remove(id);
         return "User with id " + id + " has been removed";
+    }
+    @PutMapping("/addFriend")
+    @ResponseBody
+    public String addFriend(@RequestParam(name="name")String name)
+    {
+        String returner = "";
+        for(int i=0;i<userList.size();i++)
+        {
+            if(userList.get(i).name == name)
+            {
+                friendList.add(userList.get(i));
+                returner = userList.get(i).name;
+            }
+        }
+        return returner;
     }
 
     public UserController()
