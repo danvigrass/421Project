@@ -38,7 +38,7 @@
         <a  href="Menu.html">Home</a>
         <a class="active" href="review">Game Reviews</a>
         <a href="Newsfeed.html">Newsfeed</a>
-        <a href="Chatroom.html">Chatrooms</a>
+        <a href="/chatroom">Chatrooms</a>
     </div>
 </head>
 <body>
@@ -145,6 +145,7 @@
             contentType: 'application/json',
             success: function(data){
                 document.getElementById("res").textContent=JSON.stringify(data);
+                
                 //$("#res").append(JSON.stringify(data));
 
 
