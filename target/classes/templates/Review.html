@@ -146,7 +146,7 @@
 
             contentType: 'application/json',
             success: function(data){
-                document.getElementById("res").textContent=(JSON.stringify(data).split(",").join("\n")).split("{").join("#").split("}").join("\n\n");
+                document.getElementById("res").textContent=(JSON.stringify(data).split(",").join("\n")).split("{").join("#").split("}").join("\n\n").split("[").join("").split("]").join("");
                 
                 //$("#res").append(JSON.stringify(data));
 
