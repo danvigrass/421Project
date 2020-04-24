@@ -47,7 +47,7 @@
 </form>
 
 <form id="formShowAllPosts" th:action="@{Newsfeed/GetAll}" method="get">
-    <button type="button" id="showAllButton">Show All Posts</button>
+    <button type="submit" id="showAllButton">Show All Posts</button>
 </form>
 
 <div>Create a new post</div>
@@ -57,15 +57,53 @@
     <label>What would you like to say?: <input type="text" id="postBody"></label>
 </form>
 
-
-
 <div class="newsHolder">
     <div class="newsPost">
         <strong>Poster</strong>
         <p>Post content</p>
         <p>Post #</p>
     </div>
+    <div class="newsPost">
+        <strong>Allen</strong>
+        <p>This is a post by me</p>
+        <p>1</p>
+    </div>
+    <div class="newsPost">
+        <strong>Bob</strong>
+        <p>This is a post by bob</p>
+        <p>2</p>
+    </div>
+    <div class="newsPost">
+        <strong>Someone Else</strong>
+        <p>I have no clue how to hook up to the backend</p>
+        <p>3</p>
+    </div>
 </div>
+
+<div>
+    <p id="result"></p>
+</div>
+
+<script>
+    function getAllPostings(data) {
+        let htmlString = ""
+        for (let i in data) {
+            htmlString += "<div class='newsHolder'>"
+            htmlString += "<strong>"
+            htmlString += data[i].userName
+            htmlString += "</strong>"
+            htmlString += "<p>"
+            htmlString += data[i].messageBody
+            htmlString += "</p>"
+            htmlString += "<p>"
+            htmlString += data[i].ID
+            htmlString += "</p>"
+            htmlString += "</div>"
+        }
+        let container = DOM.getElementById("newsHolder")
+        container.innerHTML = htmlString
+    }
+</script>
 
 </body>
 </html>
