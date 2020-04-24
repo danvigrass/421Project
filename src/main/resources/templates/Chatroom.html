@@ -45,26 +45,58 @@
 
 <div class ="ChatContainer">
     <div class ="ChatHeader">
-        <h3>Welcome CurrentUser to the chatroom</h3>
+        <h3>Welcome to the chatroom</h3>
 
-
-        <form action="/chatroom/newUser" id="newuser" method="post">
+<!----EP1------->
+        <form th:action="@{/chatroom/newUser}" id="newuser" method="post">
             <input type ="text" name ="name" id ="text2" placeholder="Enter a gamertag to add user to the chat"/>
-            <input type ="submit"  value ="Search" text="Add"/>
+            <input type ="button"  id ="button1" value ="Add" />
         </form>
+<script>
 
-       <form action="/chatroom/getChatUsers" id="getUsers" method="get">
+    $("#button1").click(function () {
+        $.ajax({
+            url: $("#newuser").attr("action")+"?name="+$("#text2").val(),
+            type: $("#newuser").attr("method"),
+            contentType: 'application/json',
+            success: function(data){
+            }
+        });
+
+    });
+</script>
+
+ <!----EP2------->
+       <form th:action="@{/chatroom/getChatUsers}" id="getUsers" method="get">
            <input type="submit" value="Show User List">
-
        </form>
 
-        
+<!----EP3------->
+        <form th:action="@{/chatroom/removeUser}" id="removeUser" method="delete">
+            <input type ="text" name ="name" id ="text3" placeholder="Enter the name of the user you want removed from the chat"/>
+            <input type="button" id="button2" value="remove">
+        </form>
+
+        <script>
+
+            $("#button2").click(function () {
+                $.ajax({
+                    url: $("#removeUser").attr("action")+"?name="+$("#text3").val(),
+                    type: $("#removeUser").attr("method"),
+                    contentType: 'application/json',
+                    success: function(data){
+                    }
+                });
+
+            });
+        </script>
+
+
     </div>
     <div class="chatMessages">
         <ul id="list" >
         </ul>
     </div>
-
 
     <div class="chatBottom">
 
@@ -86,7 +118,7 @@
             }else {
                     listNode = document.getElementById('list'),
                         liNode = document.createElement("LI"),
-                        txtNode = document.createTextNode("<CurrentUser> " + text.value);
+                        txtNode = document.createTextNode("<" +text2.value+"> " + text.value);
                     liNode.appendChild(txtNode);
                     listNode.appendChild(liNode);
                     document.getElementById('text').value ="";

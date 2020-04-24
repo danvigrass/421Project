@@ -15,7 +15,10 @@ public class UserController {
     {
         return friendList;
     }
-
+    @GetMapping("/menu")
+    public String mainmenu(){
+        return "menu";
+    }
     @GetMapping("/friends")
     public String friends() {
         return "friends";

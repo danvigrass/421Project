@@ -20,6 +20,13 @@ public class ChatRoomController {
     @ResponseBody
     public ArrayList<String> NewUser(@RequestParam(name="name")String name)
     {
+        for(int i =0;i<userList.size();i++)
+        {
+            if(userList.get(i).equals(name))
+            {
+                return userList;
+            }
+        }
         userList.add(name);
         return userList;
     }
@@ -39,39 +46,23 @@ public class ChatRoomController {
         return userList.get(id);
     }
 
-    @GetMapping("chatroom/getAllChat")
+
+
+    @DeleteMapping("chatroom/removeUser")
     @ResponseBody
-    public String getAllChat()
+    public String deleteMessage(@RequestParam(name="name")String name)
     {
-        String returner = "";
-        for(int i = 0; i< ChatRoomChat.size(); i++)
+        int x = 0;
+        for(int i =0;i<userList.size();i++)
         {
-            returner = returner.concat(ChatRoomChat.get(i).userMessage);
+            if (userList.get(i).equals(name)) {
+                userList.remove(i);
+                x=i;
+            }
         }
-        return returner;
+        return "Message with id " + x + " has been removed";
     }
 
-    @DeleteMapping("chatroom/deleteMessage")
-    @ResponseBody
-    public String deleteMessage(@RequestParam(name="id")int id)
-    {
-        ChatRoomChat.remove(id);
-        return "Message with id " + id + " has been removed";
-    }
-
-    @PostMapping("chatroom/createMessage")
-    @ResponseBody
-    public String createMessage(@RequestParam (name="text")String text)
-    {
-        if(text=="")
-        {
-            return "";
-        }
-        else
-        {
-            return text;
-        }
-    }
 
     public ChatRoomController()
     {
