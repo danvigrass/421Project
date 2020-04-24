@@ -45,6 +45,11 @@ public class NewsFeed {
         }
     }
 
+    @GetMapping("/newsFeed")
+    public String newsFeed() {
+        return "NewsFeed";
+    }
+
     @RequestMapping("NewsFeed/CreatePost")
     @ResponseBody
     public String newPost(@RequestBody NewsHolder item) {
