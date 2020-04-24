@@ -71,7 +71,7 @@
         </form>
     </aside>
     <p>
-    <p id="res"></p>
+    <pre id="res"></pre>
     </p>
 </div>
 
@@ -146,7 +146,7 @@
 
             contentType: 'application/json',
             success: function(data){
-                document.getElementById("res").textContent=JSON.stringify(data);
+                document.getElementById("res").textContent=(JSON.stringify(data).split(",").join("\n")).split("{").join("#").split("}").join("\n\n");
                 
                 //$("#res").append(JSON.stringify(data));
 

@@ -12,11 +12,13 @@ aside{
 }
 
 #res{padding-right: 800px;
-    width:700px;
-    Height:200px;
+    width:100px;
+    Height:5000px;
     display: block;
     overflow-wrap: break-word ;
     line-height: 30px;
+    background-color: white;
+    overflow: scroll;
 
 }
 
