@@ -16,6 +16,33 @@ public class UserController {
         return userList.get(id).friends;
     }
 
+    @GetMapping("/friends")
+    public String friends() {
+        return "friends";
+    }
+    @PutMapping("/addFriend")
+    @ResponseBody
+    public ArrayList<User> addFriend(@RequestParam(name="name")String name)
+    {
+
+        for(int i=0;i<userList.size();i++)
+        {
+            if(userList.get(i).name == name)
+            {
+                friendList.add(userList.get(i));
+            }
+        }
+        return friendList;
+    }
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
+    @GetMapping("/register")
+    public String register(){
+        return "register";
+    }
+
 @GetMapping("/getAllUsers")//repurposed
 @ResponseBody
 public String getAllUsers()
@@ -62,26 +89,12 @@ public String getAllUsers()
         userList.remove(id);
         return "User with id " + id + " has been removed";
     }
-    @PutMapping("/addFriend")
-    @ResponseBody
-    public String addFriend(@RequestParam(name="name")String name)
-    {
-        String returner = "";
-        for(int i=0;i<userList.size();i++)
-        {
-            if(userList.get(i).name == name)
-            {
-                friendList.add(userList.get(i));
-                returner = userList.get(i).name;
-            }
-        }
-        return returner;
-    }
+
 
     public UserController()
     {
-        User d1 = new User("test user",  "loveyou@gmail.com", "test");
-        User d2 = new User("test user2",  "loveyou2@gmail.com", "test");
+        User d1 = new User("d",  "loveyou@gmail.com", "test");
+        User d2 = new User("testuser2",  "loveyou2@gmail.com", "test");
         userList.add(d1);
         userList.add(d2);
 

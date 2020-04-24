@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<script type="text/javascript">
-    var x = document.getElementById("addFriends");
+<!--<script type="text/javascript">
+    var x = document.getElementById("addf");
     new XMLHttpRequest()
-    let data = {'name':x[0],'email':x[1],'password':x[2]};
+    let data = x[0];
     $.ajax({
-        url: "Http://localhost:8080/addFriend/"+ x[0],
+        url: "Http://localhost:8080/addFriend?name=",
         type: 'POST',
         crossDomain:true,
-        dataType: 'json',
+        dataType: "${param.type}",
         contentType: 'application/json',
         data: JSON.stringify(data),
         success: (data) => {
@@ -25,11 +25,11 @@
 
 
     });
-    </script>
+    </script>-->
 <form action="/addFriend" id="addFriends">
     <label for="addf">Add friend: </label>
-    <input id="addf" placeholder="Username" type="text">
-    <input type="submit" id="sub" text="Add">
+    <input id="addf" placeholder="Username" name="name" type="text">
+    <input type="submit" id="sub" text="Add" value="search">
 </form>
 
 </body>

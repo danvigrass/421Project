@@ -18,14 +18,14 @@ public class Security extends WebSecurityConfigurerAdapter {
         http.httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/getAllUsers").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/getAl").hasRole("ADMIN")
                 .and()
                 .csrf().disable()
                 .formLogin().disable();
         http.httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/getAllChat").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/get").hasRole("ADMIN")
                 .and()
                 .csrf().disable()
                 .formLogin().disable();
@@ -46,7 +46,7 @@ public class Security extends WebSecurityConfigurerAdapter {
         http.httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.DELETE,"/deleteUser").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE,"/del").hasRole("ADMIN")
                 .and()
                 .csrf().disable()
                 .formLogin().disable();
