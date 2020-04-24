@@ -22,7 +22,7 @@ public class NewsFeed {
         postings.add(item3);
     }
 
-    @RequestMapping("NewsFeed/GetAll")
+    @GetMapping("NewsFeed/GetAll")
     @ResponseBody
     public ArrayList<NewsHolder> getAllPostings() {
         return postings;

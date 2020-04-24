@@ -56,6 +56,7 @@
     <div></div>
     <label>What would you like to say?: <input type="text" id="postBody"></label>
     <label>Enter your ID: <input type="text" id="postID"></label>
+    <button type="button" id="newPostButton">Post</button>
 </form>
 
 <div class="newsHolder">
@@ -120,6 +121,27 @@
         return  jsonStr;
     }
 
+    $("#newPostButton").click(function () {
+        $.ajax({
+            url: $("#formCreatePost").attr("action")+"?item="+getFormString(),
+            type: $("#formCreatePost").attr("method"),
+            contentType: 'application/json',
+            success: function (data) {
+                console.log(data)
+            }
+        });
+    });
+
+    $("#showAllButton").click(function () {
+        $.ajax({
+            url: $("#formShowAllPosts").attr("action"),
+            method: $("#formShowAllPosts").attr("method"),
+            contentType: 'application/json',
+            success: function (data) {
+                console.log(data)
+            }
+        });
+    });
 
 </script>
 
