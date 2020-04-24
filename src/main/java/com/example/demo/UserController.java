@@ -44,7 +44,7 @@ public class UserController {
         for(int i=0;i<userList.size();i++)
         {
 
-            if(userList.get(i).name == un && userList.get(i).password == pw)
+            if(userList.get(i).name.equals(un)  && userList.get(i).password.equals(pw))
             {
                 returner = true;
             }
@@ -75,10 +75,11 @@ public String getAllUsers()
 
     @PostMapping("/createUser")//repurposed
     @ResponseBody
-    public User createUser(@RequestBody User t)
+    public ArrayList<User> createUser(@RequestParam(name="name")String name,@RequestParam(name="email")String email, @RequestParam(name="pw")String pw)
     {
+        User t = new User(name,email,pw);
         userList.add(t);
-        return t;
+        return userList;
     }
 
     @PutMapping("/updateUser")//repurposed
