@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +10,7 @@ import java.util.HashMap;
 @Controller
 public class rating {
     private HashMap<String, ArrayList> Reviews = new HashMap<>();
+    @Autowired UserController uc;
 
     //gets reviews for a game, type name of game as Catname param
     @GetMapping("Review/Get/Category")

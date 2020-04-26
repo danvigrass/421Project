@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.sun.org.apache.xml.internal.security.algorithms.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,9 @@ import java.util.Date;
 public class UserController {
     ArrayList<User> userList = new ArrayList<User>();
     ArrayList<User> friendList = new ArrayList();
+    User currentUser = new User();
+
+
     @GetMapping("/getFriends")
     @ResponseBody
     public ArrayList<User> getFriends()
@@ -72,6 +76,7 @@ public class UserController {
             if(userList.get(i).name.equals(un)  && userList.get(i).password.equals(pw))
             {
                  returner = "Login Successful click Ok to continue";
+                 currentUser = userList.get(i);
             }
         }
         return returner;
@@ -150,13 +155,12 @@ public String getAllUsers()
 
     public UserController()
     {
-        User d1 = new User("d",  "loveyou@gmail.com", "test");
-        User d2 = new User("testuser2",  "loveyou2@gmail.com", "test");
-        User d3 = new User("t", "t", "t");
+        User d1 = new User("zach",  "dmv5262@psu.edu", "test");
+        User d2 = new User("dan",  "test@gmail.com", "test");
+        User d3 = new User("avery", "test2@gmail.com", "test");
         userList.add(d1);
         userList.add(d2);
         userList.add(d3);
-
         
     }//curl -X POST -d '{}' -u admin:admin http://localhost:8080/changemenu
     //curl -X POST -d '{"type":"test","priceEach":6.0,"description":"test description"}' -u admin:admin https://localhost:8443/createCategory

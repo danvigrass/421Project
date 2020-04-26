@@ -2,6 +2,8 @@ package com.example.demo;
 
 import java.util.ArrayList;
 
+import static com.sun.xml.internal.org.jvnet.fastinfoset.EncodingAlgorithmIndexes.UUID;
+
 public class User {
     public String name;
     public int id;
@@ -11,6 +13,12 @@ public class User {
     public ArrayList<User> friends = new ArrayList();
     public String token;
 
+    public User()
+    {
+        this.id=UUID;
+        this.email = "";
+
+    }
     public User(String name, String email, String pw) {
         this.name = name;
         this.id = id;
