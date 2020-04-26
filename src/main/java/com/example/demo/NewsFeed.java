@@ -54,7 +54,10 @@ public class NewsFeed {
 
     @RequestMapping("NewsFeed/CreatePost")
     @ResponseBody
-    public String newPost(@RequestBody NewsHolder item) {
+    public String newPost(@RequestParam("message") String message) {
+        int id = (int)uc.currentUser.getId();
+        String name = uc.currentUser.getName();
+        NewsHolder item = new NewsHolder(id, name, message);
         postings.add(item);
         return "Your post has been added";
     }

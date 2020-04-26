@@ -125,7 +125,7 @@
 
     $("#newPostButton").click(function () {
         $.ajax({
-            url: $("#formCreatePost").attr("action")+"?item="+getFormString(),
+            url: $("#formCreatePost").attr("action")+"?message="+ $("#postBody").val(),
             type: $("#formCreatePost").attr("method"),
             contentType: 'application/json',
             success: function(data){
