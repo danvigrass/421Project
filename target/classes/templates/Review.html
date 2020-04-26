@@ -56,8 +56,6 @@
             <div>Would You like to Write a review</div>
             <label>Game Name: <input type="text" ID="Game_name"> </label>
             <div></div>
-            <label>User ID: <input type="number" ID="User"> </label>
-            <div></div>
             <label>Review: <input type="text" ID="Review_name"> </label>
             <div></div>
             <label>rating: <input type="number" ID="Rating"> <button type="button" id="button1">Post</button></label>
@@ -71,7 +69,7 @@
             <label>Delete: <input type="text" ID="Deleter"> <button type="button" id="button3">Delete</button></label>
         </form>
         <p>
-            
+
         </p>
     </aside>
     <p>
@@ -111,7 +109,7 @@
         jsonStr += '{';
         jsonStr += '"UserID": ';
 
-        jsonStr += $("#User").val() ;
+        jsonStr += $("#Rating").val() ;
         jsonStr += ',';
         jsonStr +='"Rating": ';
         jsonStr += $("#Rating").val() ;
