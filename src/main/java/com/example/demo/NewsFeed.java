@@ -52,7 +52,7 @@ public class NewsFeed {
         return "NewsFeed";
     }
 
-    @RequestMapping("NewsFeed/CreatePost")
+    @PostMapping("NewsFeed/CreatePost")
     @ResponseBody
     public String newPost(@RequestParam("message") String message) {
         int id = (int)uc.currentUser.getId();
