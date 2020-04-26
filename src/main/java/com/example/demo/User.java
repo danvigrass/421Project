@@ -9,6 +9,7 @@ public class User {
     public String password;
     public ArrayList<Game> games = new ArrayList<Game>();
     public ArrayList<User> friends = new ArrayList();
+    public String token;
 
     public User(String name, String email, String pw) {
         this.name = name;
@@ -19,6 +20,38 @@ public class User {
 
     public String getName() {
         return name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public ArrayList<Game> getGames() {
+        return games;
+    }
+
+    public void setGames(ArrayList<Game> games) {
+        this.games = games;
+    }
+
+    public ArrayList<User> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(ArrayList<User> friends) {
+        this.friends = friends;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public void setName(String name) {

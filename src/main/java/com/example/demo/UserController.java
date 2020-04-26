@@ -1,17 +1,20 @@
 package com.example.demo;
 
+import com.sun.org.apache.xml.internal.security.algorithms.SignatureAlgorithm;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletException;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Controller
 public class UserController {
     ArrayList<User> userList = new ArrayList<User>();
-    ArrayList<String> friendList = new ArrayList();
+    ArrayList<User> friendList = new ArrayList();
     @GetMapping("/getFriends")
     @ResponseBody
-    public ArrayList<String> getFriends()
+    public ArrayList<User> getFriends()
     {
         return friendList;
     }
@@ -25,10 +28,15 @@ public class UserController {
     }
     @PostMapping("/addFriend")
     @ResponseBody
-    public ArrayList<String> addFriend(@RequestParam(name="name")String name)
+    public ArrayList<User> addFriend(@RequestParam(name="name")String name)
     {
-        friendList.add(name);
-
+        for(int i=0;i<userList.size();i++)
+        {
+            if(userList.get(i).name.equals(name));
+            {
+                friendList.add(userList.get(i));
+            }
+        }
         return friendList;
     }
     @GetMapping("/login")
@@ -39,6 +47,20 @@ public class UserController {
     public String register(){
         return "register";
     }
+
+    public User findByName(String n)
+    {
+        User s = new User(null,null,null);
+        for(int i=0;i<userList.size();i++)
+        {
+            if(userList.get(i).name.equals(n));
+            {
+                return userList.get(i);
+            }
+        }
+        return s;
+    }
+
     @GetMapping("/login/send")
     @ResponseBody
     public boolean loginSend(@RequestParam(name="un") String un, @RequestParam(name="pw")String pw)
@@ -54,6 +76,36 @@ public class UserController {
         }
         return returner;
     }
+
+    /*@RequestMapping(value ="/login/send", method = RequestMethod.POST)
+    @ResponseBody
+    public String loginSend(@RequestBody User login) throws ServletException
+    {
+        String jwtToken = "";
+        if(login.getName() == null || login.getPassword() == null)
+        {
+            throw new ServletException("Please fill in username and password");
+        }
+        String name = login.getName();
+        String password = login.getPassword();
+
+        User user = findByName(name);
+
+        if(user == null){
+            throw new ServletException("User not found");
+        }
+
+        String pwd = user.getPassword();
+
+        if(!password.equals(pwd)){
+            throw new ServletException("Invalid login. Please check credentials and try again");
+        }
+
+        jwtToken = Jwts.builder().setSubject(name).claim("roles", "user").setIssuedAt(new Date())
+                .signWith(SignatureAlgorithm.HS256, "secretkey").compact();
+
+        return jwtToken;
+    }*/
 
 @GetMapping("/getAllUsers")//repurposed
 @ResponseBody
@@ -85,23 +137,15 @@ public String getAllUsers()
         return userList;
     }
 
-    @PutMapping("/updateUser")//repurposed
-    @ResponseBody
-    public String updateUser(@RequestBody User detail, @RequestParam(name="id")int id)
-    {
-        userList.remove(id);
-        userList.add(detail);
-        return "Your updated category: " + detail;
-    }
 
-
+/*
     @DeleteMapping("/deleteUser")//repurposed
     @ResponseBody
     public String deleteUser(@RequestParam(name="id")int id)
     {
         userList.remove(id);
         return "User with id " + id + " has been removed";
-    }
+    }*/
 
 
     public UserController()
@@ -113,6 +157,7 @@ public String getAllUsers()
         userList.add(d2);
         userList.add(d3);
 
+        
     }//curl -X POST -d '{}' -u admin:admin http://localhost:8080/changemenu
     //curl -X POST -d '{"type":"test","priceEach":6.0,"description":"test description"}' -u admin:admin https://localhost:8443/createCategory
 }

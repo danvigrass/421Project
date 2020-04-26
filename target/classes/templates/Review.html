@@ -156,6 +156,7 @@
                 bubba=bubba.split('"rating":').join("<"+'Rating|').split('|').join(">");
                 bubba=bubba.split('"text_writing":').join("<"+'Reveiw|').split('|').join(">");
                 bubba=bubba.split('"game_Title":').join("<"+'Title of Game|').split('|').join(">");
+                bubba = bubba.bold();
                 document.getElementById("res").textContent=bubba
                 //$("#res").append(JSON.stringify(data));
 
