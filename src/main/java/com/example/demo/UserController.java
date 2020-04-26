@@ -61,17 +61,17 @@ public class UserController {
         return s;
     }
 
-    @GetMapping("/login/send")
+    @PostMapping("/login/send")
     @ResponseBody
-    public boolean loginSend(@RequestParam(name="un") String un, @RequestParam(name="pw")String pw)
+    public String loginSend(@RequestParam(name="un") String un, @RequestParam(name="pw")String pw)
     {
-        boolean returner = false;
+        String returner = "Invalid username and or password please try again.";
         for(int i=0;i<userList.size();i++)
         {
 
             if(userList.get(i).name.equals(un)  && userList.get(i).password.equals(pw))
             {
-                returner = true;
+                 returner = "Login Successful click Ok to continue";
             }
         }
         return returner;

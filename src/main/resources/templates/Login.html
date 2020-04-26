@@ -3,6 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <style>
+        .topnav {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .topnav a{
+            float: left;
+        }
+
+        .topnav a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .topnav a:hover:not(.active) {
+            background-color: #111;
+        }
+
+        .active {
+            background-color: #4CAF50;
+        }
+    </style>
+    <div class="topnav">
+        <a  href="/menu">Home</a>
+        <a href="/review">Game Reviews</a>
+        <a  href="/NewsFeed">Newsfeed</a>
+        <a class="active" href="/chatroom">Chatrooms</a>
+        <a  href="/friends">Friends</a>
+        <a href="/login">Login</a>
+    </div>
 </head>
 <body style="background-color:#99aab5;">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -25,7 +62,15 @@
             type: $("#theVal").attr("method"),
             contentType: 'application/json',
             success: function(data){
-                alert(data);
+                if(data=="Login Successful click Ok to continue")
+                {
+                    //alert(data);
+                    window.location="http://localhost:8080/menu";
+                }
+                else
+                {
+                    alert(data);
+                }
             }
         });
 
