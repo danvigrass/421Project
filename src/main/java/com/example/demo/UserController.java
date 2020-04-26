@@ -12,7 +12,7 @@ import java.util.Date;
 @Controller
 public class UserController {
     ArrayList<User> userList = new ArrayList<User>();
-    ArrayList<User> friendList = new ArrayList();
+    //ArrayList<User> friendList = new ArrayList();
     User currentUser = new User();
 
 
@@ -20,7 +20,7 @@ public class UserController {
     @ResponseBody
     public ArrayList<User> getFriends()
     {
-        return friendList;
+        return currentUser.friends;
     }
     @GetMapping("/menu")
     public String mainmenu(){
@@ -38,10 +38,10 @@ public class UserController {
         {
             if(userList.get(i).name.equals(name));
             {
-                friendList.add(userList.get(i));
+                currentUser.friends.add(userList.get(i));
             }
         }
-        return friendList;
+        return currentUser.friends;
     }
     @GetMapping("/login")
     public String login(){
@@ -82,35 +82,7 @@ public class UserController {
         return returner;
     }
 
-    /*@RequestMapping(value ="/login/send", method = RequestMethod.POST)
-    @ResponseBody
-    public String loginSend(@RequestBody User login) throws ServletException
-    {
-        String jwtToken = "";
-        if(login.getName() == null || login.getPassword() == null)
-        {
-            throw new ServletException("Please fill in username and password");
-        }
-        String name = login.getName();
-        String password = login.getPassword();
 
-        User user = findByName(name);
-
-        if(user == null){
-            throw new ServletException("User not found");
-        }
-
-        String pwd = user.getPassword();
-
-        if(!password.equals(pwd)){
-            throw new ServletException("Invalid login. Please check credentials and try again");
-        }
-
-        jwtToken = Jwts.builder().setSubject(name).claim("roles", "user").setIssuedAt(new Date())
-                .signWith(SignatureAlgorithm.HS256, "secretkey").compact();
-
-        return jwtToken;
-    }*/
 
 @GetMapping("/getAllUsers")//repurposed
 @ResponseBody
@@ -141,7 +113,16 @@ public String getAllUsers()
         userList.add(t);
         return userList;
     }
+    public UserController()
+    {
+        User d1 = new User("zach",  "dmv5262@psu.edu", "test");
+        User d2 = new User("dan",  "test@gmail.com", "test");
+        User d3 = new User("avery", "test2@gmail.com", "test");
+        userList.add(d1);
+        userList.add(d2);
+        userList.add(d3);
 
+    }
 
 /*
     @DeleteMapping("/deleteUser")//repurposed
@@ -152,16 +133,37 @@ public String getAllUsers()
         return "User with id " + id + " has been removed";
     }*/
 
-
-    public UserController()
+        /*@RequestMapping(value ="/login/send", method = RequestMethod.POST)
+    @ResponseBody
+    public String loginSend(@RequestBody User login) throws ServletException
     {
-        User d1 = new User("zach",  "dmv5262@psu.edu", "test");
-        User d2 = new User("dan",  "test@gmail.com", "test");
-        User d3 = new User("avery", "test2@gmail.com", "test");
-        userList.add(d1);
-        userList.add(d2);
-        userList.add(d3);
-        
-    }//curl -X POST -d '{}' -u admin:admin http://localhost:8080/changemenu
+        String jwtToken = "";
+        if(login.getName() == null || login.getPassword() == null)
+        {
+            throw new ServletException("Please fill in username and password");
+        }
+        String name = login.getName();
+        String password = login.getPassword();
+
+        User user = findByName(name);
+
+        if(user == null){
+            throw new ServletException("User not found");
+        }
+
+        String pwd = user.getPassword();
+
+        if(!password.equals(pwd)){
+            throw new ServletException("Invalid login. Please check credentials and try again");
+        }
+
+        jwtToken = Jwts.builder().setSubject(name).claim("roles", "user").setIssuedAt(new Date())
+                .signWith(SignatureAlgorithm.HS256, "secretkey").compact();
+
+        return jwtToken;
+    }*/
+
+
+//curl -X POST -d '{}' -u admin:admin http://localhost:8080/changemenu
     //curl -X POST -d '{"type":"test","priceEach":6.0,"description":"test description"}' -u admin:admin https://localhost:8443/createCategory
 }

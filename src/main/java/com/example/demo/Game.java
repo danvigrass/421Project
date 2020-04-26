@@ -40,7 +40,6 @@ public class Game {
     public String description;
     public double rating;
 
-
     public Game(String name) {
         this.name = name;
     }

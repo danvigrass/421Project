@@ -58,7 +58,9 @@ public class rating {
             Reviews.remove(name);
             answer.add(review);
             Reviews.put(name,answer);
+            uc.currentUser.getName();
             return name;
+
         }
 
         else{
