@@ -1,0 +1,19 @@
+<changelist name="Uncommitted_changes_before_Update_at_4_23_2020_10_38_PM_[Default_Changelist]" date="1587695901430" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_23_2020_10_38_PM_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 4/23/2020 10:38 PM [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/example/demo/NewsFeed.class" />
+    <option name="AFTER_PATH" value="target/classes/com/example/demo/NewsFeed.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_23_2020_10_38_PM_[Default_Changelist]/NewsFeed.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/example/demo/Security.class" />
+    <option name="AFTER_PATH" value="target/classes/com/example/demo/Security.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_23_2020_10_38_PM_[Default_Changelist]/Security.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/example/demo/UserController.class" />
+    <option name="AFTER_PATH" value="target/classes/com/example/demo/UserController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_23_2020_10_38_PM_[Default_Changelist]/UserController.class" />
+  </binary>
+</changelist>

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.ServletException;
 import java.util.ArrayList;
 import java.util.Date;
-
+//
 @Controller
 public class UserController {
     ArrayList<User> userList = new ArrayList<User>();

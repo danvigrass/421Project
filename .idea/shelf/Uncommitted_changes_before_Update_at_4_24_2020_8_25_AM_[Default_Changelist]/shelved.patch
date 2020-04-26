@@ -1,0 +1,17 @@
+Index: src/main/java/com/example/demo/NewsFeed.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.demo;\r\n\r\nimport org.springframework.stereotype.Controller;\r\nimport org.springframework.web.bind.annotation.*;\r\n\r\nimport java.util.ArrayList;\r\n//Controller for NewsHolder class\r\n@Controller\r\npublic class NewsFeed {\r\n    private ArrayList<NewsHolder> postings;\r\n\r\n    public NewsFeed() {\r\n        postings = new ArrayList<>();\r\n        NewsHolder item0 = new NewsHolder(0, \"John\", \"I am John and I made this post\");\r\n        NewsHolder item1 = new NewsHolder(1, \"John\", \"I am also John and I posted this\");\r\n        NewsHolder item2 = new NewsHolder(2, \"Smith\", \"I am Smith, I am not John\");\r\n        NewsHolder item3 = new NewsHolder(3, \"What\", \"I have no clue what I am but I exist\");\r\n\r\n        postings.add(item0);\r\n        postings.add(item1);\r\n        postings.add(item2);\r\n        postings.add(item3);\r\n    }\r\n\r\n    @GetMapping(\"NewsFeed/GetAll\")\r\n    @ResponseBody\r\n    public ArrayList<NewsHolder> getAllPostings() {\r\n        return postings;\r\n    }\r\n\r\n    @RequestMapping(\"NewsFeed/GetPostByName\")\r\n    @ResponseBody\r\n    public ArrayList<NewsHolder> getPostsFromUser(@RequestParam(name=\"userName\") String userName) {\r\n        ArrayList<NewsHolder> result = new ArrayList<>();\r\n        for (NewsHolder item : postings) {\r\n            if (item.getUserName().equals(userName)) {\r\n                result.add(item);\r\n            }\r\n        }\r\n        if (result.isEmpty()) {\r\n            return null;\r\n        }\r\n        else {\r\n            return result;\r\n        }\r\n    }\r\n\r\n    @GetMapping(\"/NewsFeed\")\r\n    public String newsFeed() {\r\n        return \"NewsFeed\";\r\n    }\r\n\r\n    @RequestMapping(\"NewsFeed/CreatePost\")\r\n    @ResponseBody\r\n    public String newPost(@RequestBody NewsHolder item) {\r\n        postings.add(item);\r\n        return \"Your post has been added\";\r\n    }\r\n\r\n    @RequestMapping(\"NewsFeed/UpdatePost\")\r\n    @ResponseBody\r\n    public String updatePost(@RequestParam(name=\"index\") int index, @RequestParam(name=\"newText\") String newText) {\r\n        postings.get(index).setMessageBody(newText);\r\n        return \"Your post has been updated\";\r\n    }\r\n\r\n    @RequestMapping(\"NewsFeed/DeletePost\")\r\n    @ResponseBody\r\n    public String deletePost(@RequestParam(name=\"index\") int index) {\r\n        postings.remove(index);\r\n        return \"Your post has been deleted\";\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/example/demo/NewsFeed.java	(revision 8b888e83c1eaf9125ca96126aeac4afd4a9c828c)
++++ src/main/java/com/example/demo/NewsFeed.java	(date 1587729681064)
+@@ -70,5 +70,4 @@
+         postings.remove(index);
+         return "Your post has been deleted";
+     }
+-
+-}
++}
+\ No newline at end of file

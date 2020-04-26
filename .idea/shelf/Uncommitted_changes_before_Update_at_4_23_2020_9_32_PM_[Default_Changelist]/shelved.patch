@@ -1,0 +1,97 @@
+Index: src/main/resources/templates/Register.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js\"></script>\r\n    <meta charset=\"UTF-8\">\r\n    <title>Register</title>\r\n</head>\r\n<body>\r\n\r\n<script type=\"text/javascript\">\r\n    var x = document.getElementById(\"register\");\r\n    new XMLHttpRequest()\r\n    let data = {'name':x[0],'email':x[1],'password':x[2]};\r\n    $.ajax({\r\n        url: \"Http://localhost:8080/createUser\",\r\n        type: 'POST',\r\n        crossDomain:true,\r\n        dataType: 'json',\r\n        contentType: 'application/json',\r\n        data: JSON.stringify(data),\r\n        success: (data) => {\r\n            console.log(data);\r\n        },\r\n        error: (er) => {\r\n            console.log(er);\r\n        }\r\n\r\n\r\n    });\r\n</script>\r\n<form action=\"/createUser\" id=\"register\">\r\n    <label for=\"un\">Username:</label><br>\r\n    <input type=\"text\" id=\"un\" name=\"un\"><br>\r\n    <label for=\"em\">Email:</label><br>\r\n    <input type=\"text\" id=\"em\" name=\"em\"><br>\r\n    <label for=\"pw\">Password:</label><br>\r\n    <input type=\"text\" id=\"pw\" name=\"pw\"><br><br>\r\n    <input type=\"submit\" value=\"Register\">\r\n</form>\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/templates/Register.html	(revision f291ca57e78accb431e6ce18442c695ccc8934e2)
++++ src/main/resources/templates/Register.html	(date 1587691565536)
+@@ -38,4 +38,4 @@
+     <input type="submit" value="Register">
+ </form>
+ </body>
+-</html>
+\ No newline at end of file
++</html>
+Index: src/main/resources/templates/Login.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <title>Login</title>\r\n</head>\r\n<body>\r\n\r\n<form action=\"/SendLogin\">\r\n    <label for=\"un\">Username:</label><br>\r\n    <input type=\"text\" id=\"un\" name=\"un\" ><br>\r\n    <label for=\"pw\">Password:</label><br>\r\n    <input type=\"text\" id=\"pw\" name=\"pw\"><br><br>\r\n    <input type=\"submit\" value=\"Submit\">\r\n</form>\r\n\r\n\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/templates/Login.html	(revision f291ca57e78accb431e6ce18442c695ccc8934e2)
++++ src/main/resources/templates/Login.html	(date 1587691565542)
+@@ -13,6 +13,7 @@
+     <input type="text" id="pw" name="pw"><br><br>
+     <input type="submit" value="Submit">
+ </form>
++<a href="Register.html">Register</a>
+ 
+ 
+ </body>
+Index: src/main/java/com/example/demo/UserController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.demo;\r\n\r\nimport org.springframework.stereotype.Controller;\r\nimport org.springframework.web.bind.annotation.*;\r\n\r\nimport java.util.ArrayList;\r\n\r\n@Controller\r\npublic class UserController {\r\n    ArrayList<User> userList = new ArrayList<User>();\r\n\r\n    @GetMapping(\"/getFriends\")\r\n    @ResponseBody\r\n    public ArrayList<User> getFriends(@RequestParam(name=\"id\")int id)\r\n    {\r\n        return userList.get(id).friends;\r\n    }\r\n\r\n@GetMapping(\"/getAllUsers\")//repurposed\r\n@ResponseBody\r\npublic String getAllUsers()\r\n{\r\n    String returner = \"\";\r\n    for(int i = 0; i< userList.size(); i++)\r\n    {\r\n        returner = returner.concat(userList.get(i).name) + \", \";\r\n    }\r\n    return returner;\r\n}\r\n\r\n    @GetMapping(\"/getUser\")//repurposed\r\n    @ResponseBody\r\n    public User getUser(@RequestParam(name=\"id\")int val)\r\n    {\r\n        return userList.get(val);\r\n    }\r\n//\"type\":\"pizza\",\"priceEach\":6.0,\"description\":\"surpreme pizza\"\r\n\r\n\r\n    @PostMapping(\"/createUser\")//repurposed\r\n    @ResponseBody\r\n    public User createUser(@RequestBody User t)\r\n    {\r\n        userList.add(t);\r\n        return t;\r\n    }\r\n\r\n    @PutMapping(\"/updateUser\")//repurposed\r\n    @ResponseBody\r\n    public String updateUser(@RequestBody User detail, @RequestParam(name=\"id\")int id)\r\n    {\r\n        userList.remove(id);\r\n        userList.add(detail);\r\n        return \"Your updated category: \" + detail;\r\n    }\r\n\r\n\r\n    @DeleteMapping(\"/deleteUser\")//repurposed\r\n    @ResponseBody\r\n    public String deleteUser(@RequestParam(name=\"id\")int id)\r\n    {\r\n        userList.remove(id);\r\n        return \"User with id \" + id + \" has been removed\";\r\n    }\r\n\r\n    public UserController()\r\n    {\r\n        User d1 = new User(\"test user\",  \"loveyou@gmail.com\", \"test\");\r\n        User d2 = new User(\"test user2\",  \"loveyou2@gmail.com\", \"test\");\r\n        userList.add(d1);\r\n        userList.add(d2);\r\n\r\n    }//curl -X POST -d '{}' -u admin:admin http://localhost:8080/changemenu\r\n    //curl -X POST -d '{\"type\":\"test\",\"priceEach\":6.0,\"description\":\"test description\"}' -u admin:admin https://localhost:8443/createCategory\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/example/demo/UserController.java	(revision f291ca57e78accb431e6ce18442c695ccc8934e2)
++++ src/main/java/com/example/demo/UserController.java	(date 1587691565549)
+@@ -8,7 +8,7 @@
+ @Controller
+ public class UserController {
+     ArrayList<User> userList = new ArrayList<User>();
+-
++    ArrayList<User> friendList = new ArrayList();
+     @GetMapping("/getFriends")
+     @ResponseBody
+     public ArrayList<User> getFriends(@RequestParam(name="id")int id)
+@@ -62,6 +62,21 @@
+         userList.remove(id);
+         return "User with id " + id + " has been removed";
+     }
++    @PutMapping("/addFriend")
++    @ResponseBody
++    public String addFriend(@RequestParam(name="name")String name)
++    {
++        String returner = "";
++        for(int i=0;i<userList.size();i++)
++        {
++            if(userList.get(i).name == name)
++            {
++                friendList.add(userList.get(i));
++                returner = userList.get(i).name;
++            }
++        }
++        return returner;
++    }
+ 
+     public UserController()
+     {
+Index: src/main/resources/templates/Friends.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/templates/Friends.html	(date 1587691565555)
++++ src/main/resources/templates/Friends.html	(date 1587691565555)
+@@ -0,0 +1,15 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++    <meta charset="UTF-8">
++    <title>Title</title>
++</head>
++<body>
++<form action="/addFriend" id="addFriends">
++    <label for="addf">Add friend: </label>
++    <input id="addf" placeholder="Username" type="text">
++    <input type="submit" id="sub" text="Add">
++</form>
++
++</body>
++</html>
+\ No newline at end of file

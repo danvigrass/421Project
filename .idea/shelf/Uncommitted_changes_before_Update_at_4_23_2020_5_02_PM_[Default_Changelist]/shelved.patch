@@ -1,0 +1,69 @@
+Index: src/main/resources/templates/Menu.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <title>Home Page</title>\r\n   <!-- <link rel=\"stylesheet\" type=\"text/css\" href=\"MenuStyle.css\"> -->\r\n<style>\r\n    .topnav {\r\n        list-style-type: none;\r\n        margin: 0;\r\n        padding: 0;\r\n        overflow: hidden;\r\n        background-color: #333;\r\n    }\r\n\r\n    .topnav a{\r\n        float: left;\r\n    }\r\n\r\n    .topnav a {\r\n        display: block;\r\n        color: white;\r\n        text-align: center;\r\n        padding: 14px 16px;\r\n        text-decoration: none;\r\n    }\r\n\r\n    .topnav a:hover:not(.active) {\r\n        background-color: #111;\r\n    }\r\n\r\n    .active {\r\n        background-color: #4CAF50;\r\n    }\r\n</style>\r\n    <div class=\"topnav\">\r\n        <a class=\"active\" href=\"Menu.html\">Home</a>\r\n        <a href=\"review.html\">Game Reviews</a>\r\n        <a href=\"Newsfeed.html\">Newsfeed</a>\r\n        <a href=\"ChatroomList.html\">Chatrooms</a>\r\n    </div>\r\n</head>\r\n\r\n<body>\r\n\r\n<div class=\"Header\">\r\n    <h1> Homepage </h1>\r\n</div>\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/templates/Menu.html	(revision 3d6a2042563a944585ff5ffae35734f1b81b6cc2)
++++ src/main/resources/templates/Menu.html	(date 1587675504556)
+@@ -37,7 +37,7 @@
+         <a class="active" href="Menu.html">Home</a>
+         <a href="review.html">Game Reviews</a>
+         <a href="Newsfeed.html">Newsfeed</a>
+-        <a href="ChatroomList.html">Chatrooms</a>
++        <a href="Chatroom.html">Chatrooms</a>
+     </div>
+ </head>
+ 
+Index: src/main/resources/templates/Review.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"en\" xmlns:th=\"http://www.thymeleaf.org\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <title>Title</title>\r\n    <link rel=\"stylesheet\" type=\"text/css\" th:href=\"@{/review.css}\">\r\n    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js\"></script>\r\n</head>\r\n<body>\r\n<div id=\"Main_Body\">\r\n    <aside>\r\n        <div>Search for reviews</div>\r\n        <form id=\"f1\" th:action=\"@{Review/Get/Category}\" method=\"get\">\r\n            <label>Game Name: <input type=\"text\" ID=\"answer\"> <button type=\"button\" id=\"button\">Search</button></label>\r\n        </form>\r\n        <div>----------------------------------------------------------</div>\r\n        <form id=\"f2\" th:action=\"@{Review/Make}\" method=\"post\">\r\n            <div>Would You like to Write a review</div>\r\n            <label>Game Name: <input type=\"text\" ID=\"Game_name\"> </label>\r\n            <div></div>\r\n            <label>User Name: <input type=\"number\" ID=\"User\"> </label>\r\n            <div></div>\r\n            <label>Review: <input type=\"text\" ID=\"Review_name\"> </label>\r\n            <div></div>\r\n            <label>rating: <input type=\"number\" ID=\"Rating\"> <button type=\"button\" id=\"button1\">Post</button></label>\r\n        </form>\r\n    </aside>\r\n    <p id=\"res\"></p>\r\n\r\n</div>\r\n\r\n<script>\r\n    $.ajax({\r\n        url: (\"Review/newCategory\")+\"?Catname=\"+\"World_Of_War\",\r\n        type: \"post\",\r\n        contentType: 'application/json',\r\n        success: function(data){\r\n            $(\"#res\").innerText=data;\r\n            return alert(data);\r\n\r\n        }\r\n    });\r\n\r\n    $.ajax({\r\n        url: (\"Review/newCategory\")+\"?Catname=\"+\"League_of_Legends\",\r\n        type: \"post\",\r\n        contentType: 'application/json',\r\n        success: function(data){\r\n            $(\"#res\").append(data);\r\n            return alert(data);\r\n\r\n        }\r\n    });\r\n\r\n\r\n\r\n\r\n    function getFormString() {\r\n        var jsonStr = '';\r\n        jsonStr += '{';\r\n        jsonStr += '\"UserID\": ';\r\n        jsonStr += $(\"#User\").val() ;\r\n        jsonStr += ',';\r\n        jsonStr +='\"Rating\": ';\r\n        jsonStr += $(\"#Rating\").val() ;\r\n        jsonStr +=',';\r\n        jsonStr +='\"Text_writing\": \"';\r\n        jsonStr += $(\"#Review_name\").val() ;\r\n        jsonStr += '\",';\r\n        jsonStr +='\"Game_Title\": \"';\r\n        jsonStr +=$(\"#Game_name\").val() ;\r\n        jsonStr +='\"';\r\n        jsonStr += '}';\r\n        return jsonStr;\r\n\r\n    }\r\n\r\n    $(\"#button1\").click(function () {\r\n        console.log(getFormString());\r\n        $.ajax({\r\n            url: $(\"#f2\").attr(\"action\")+\"?Gamename=\"+$(\"#Game_name\").val(),\r\n            type: $(\"#f2\").attr(\"method\"),\r\n            data: getFormString(),\r\n            // headers:{\"Gamername\":$(\"#Game_name\").val()},\r\n            contentType: 'application/json',\r\n            success: function(data){\r\n                return alert(data);\r\n\r\n            }\r\n        });\r\n\r\n    });\r\n\r\n    $(\"#button\").click(function () {\r\n\r\n        $.ajax({\r\n            url: $(\"#f1\").attr(\"action\")+\"?Catname=\"+$(\"#answer\").val(),\r\n            type: $(\"#f1\").attr(\"method\"),\r\n\r\n            contentType: 'application/json',\r\n            success: function(data){\r\n                alert(JSON.stringify(data));\r\n                $(\"#res\").append(JSON.stringify(data));\r\n\r\n\r\n            }\r\n        });\r\n\r\n    });\r\n\r\n</script>\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/templates/Review.html	(revision 3d6a2042563a944585ff5ffae35734f1b81b6cc2)
++++ src/main/resources/templates/Review.html	(date 1587675637607)
+@@ -5,6 +5,41 @@
+     <title>Title</title>
+     <link rel="stylesheet" type="text/css" th:href="@{/review.css}">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
++    <style>
++        .topnav {
++            list-style-type: none;
++            margin: 0;
++            padding: 0;
++            overflow: hidden;
++            background-color: #333;
++        }
++
++        .topnav a{
++            float: left;
++        }
++
++        .topnav a {
++            display: block;
++            color: white;
++            text-align: center;
++            padding: 14px 16px;
++            text-decoration: none;
++        }
++
++        .topnav a:hover:not(.active) {
++            background-color: #111;
++        }
++
++        .active {
++            background-color: #4CAF50;
++        }
++    </style>
++    <div class="topnav">
++        <a  href="Menu.html">Home</a>
++        <a class="active" href="review.html">Game Reviews</a>
++        <a href="Newsfeed.html">Newsfeed</a>
++        <a href="Chatroom.html">Chatrooms</a>
++    </div>
+ </head>
+ <body>
+ <div id="Main_Body">

@@ -1,0 +1,9 @@
+<changelist name="Uncommitted_changes_before_Update_at_4_26_2020_5_11_PM_[Default_Changelist]" date="1587935510982" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_26_2020_5_11_PM_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 4/26/2020 5:11 PM [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/example/demo/UserController.class" />
+    <option name="AFTER_PATH" value="target/classes/com/example/demo/UserController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_26_2020_5_11_PM_[Default_Changelist]/UserController.class" />
+  </binary>
+</changelist>

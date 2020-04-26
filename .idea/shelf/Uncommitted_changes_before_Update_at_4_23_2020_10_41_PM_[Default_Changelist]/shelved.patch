@@ -1,0 +1,198 @@
+Index: src/main/resources/templates/Register.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js\"></script>\r\n    <meta charset=\"UTF-8\">\r\n    <title>Register</title>\r\n</head>\r\n<body>\r\n\r\n<script type=\"text/javascript\">\r\n    var x = document.getElementById(\"register\");\r\n    new XMLHttpRequest()\r\n    let data = {'name':x[0],'email':x[1],'password':x[2]};\r\n    $.ajax({\r\n        url: \"Http://localhost:8080/createUser\",\r\n        type: 'POST',\r\n        crossDomain:true,\r\n        dataType: 'json',\r\n        contentType: 'application/json',\r\n        data: JSON.stringify(data),\r\n        success: (data) => {\r\n            console.log(data);\r\n        },\r\n        error: (er) => {\r\n            console.log(er);\r\n        }\r\n\r\n\r\n    });\r\n</script>\r\n<form action=\"/createUser\" id=\"register\">\r\n    <label for=\"un\">Username:</label><br>\r\n    <input type=\"text\" id=\"un\" name=\"un\"><br>\r\n    <label for=\"em\">Email:</label><br>\r\n    <input type=\"text\" id=\"em\" name=\"em\"><br>\r\n    <label for=\"pw\">Password:</label><br>\r\n    <input type=\"text\" id=\"pw\" name=\"pw\"><br><br>\r\n    <input type=\"submit\" value=\"Register\">\r\n</form>\r\n</body>\r\n</html>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/templates/Register.html	(revision 11fb65683b11f321120d47b4ad10037dd68abeaf)
++++ src/main/resources/templates/Register.html	(date 1587695901399)
+@@ -1,5 +1,5 @@
+ <!DOCTYPE html>
+-<html lang="en">
++<html lang="en" xmlns:th="http://www.thymeleaf.org">
+ <head>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+     <meta charset="UTF-8">
+Index: src/main/resources/templates/Login.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <title>Login</title>\r\n</head>\r\n<body>\r\n\r\n<form action=\"/SendLogin\">\r\n    <label for=\"un\">Username:</label><br>\r\n    <input type=\"text\" id=\"un\" name=\"un\" ><br>\r\n    <label for=\"pw\">Password:</label><br>\r\n    <input type=\"text\" id=\"pw\" name=\"pw\"><br><br>\r\n    <input type=\"submit\" value=\"Submit\">\r\n</form>\r\n<a href=\"Register.html\">Register</a>\r\n\r\n\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/templates/Login.html	(revision 11fb65683b11f321120d47b4ad10037dd68abeaf)
++++ src/main/resources/templates/Login.html	(date 1587695901405)
+@@ -1,12 +1,12 @@
+ <!DOCTYPE html>
+-<html lang="en">
++<html lang="en" xmlns:th="http://www.thymeleaf.org">
+ <head>
+     <meta charset="UTF-8">
+     <title>Login</title>
+ </head>
+ <body>
+ 
+-<form action="/SendLogin">
++<form action="/Validate">
+     <label for="un">Username:</label><br>
+     <input type="text" id="un" name="un" ><br>
+     <label for="pw">Password:</label><br>
+Index: src/main/java/com/example/demo/UserController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.demo;\r\n\r\nimport org.springframework.stereotype.Controller;\r\nimport org.springframework.web.bind.annotation.*;\r\n\r\nimport java.util.ArrayList;\r\n\r\n@Controller\r\npublic class UserController {\r\n    ArrayList<User> userList = new ArrayList<User>();\r\n    ArrayList<User> friendList = new ArrayList();\r\n    @GetMapping(\"/getFriends\")\r\n    @ResponseBody\r\n    public ArrayList<User> getFriends(@RequestParam(name=\"id\")int id)\r\n    {\r\n        return userList.get(id).friends;\r\n    }\r\n\r\n@GetMapping(\"/getAllUsers\")//repurposed\r\n@ResponseBody\r\npublic String getAllUsers()\r\n{\r\n    String returner = \"\";\r\n    for(int i = 0; i< userList.size(); i++)\r\n    {\r\n        returner = returner.concat(userList.get(i).name) + \", \";\r\n    }\r\n    return returner;\r\n}\r\n\r\n    @GetMapping(\"/getUser\")//repurposed\r\n    @ResponseBody\r\n    public User getUser(@RequestParam(name=\"id\")int val)\r\n    {\r\n        return userList.get(val);\r\n    }\r\n//\"type\":\"pizza\",\"priceEach\":6.0,\"description\":\"surpreme pizza\"\r\n\r\n\r\n    @PostMapping(\"/createUser\")//repurposed\r\n    @ResponseBody\r\n    public User createUser(@RequestBody User t)\r\n    {\r\n        userList.add(t);\r\n        return t;\r\n    }\r\n\r\n    @PutMapping(\"/updateUser\")//repurposed\r\n    @ResponseBody\r\n    public String updateUser(@RequestBody User detail, @RequestParam(name=\"id\")int id)\r\n    {\r\n        userList.remove(id);\r\n        userList.add(detail);\r\n        return \"Your updated category: \" + detail;\r\n    }\r\n\r\n\r\n    @DeleteMapping(\"/deleteUser\")//repurposed\r\n    @ResponseBody\r\n    public String deleteUser(@RequestParam(name=\"id\")int id)\r\n    {\r\n        userList.remove(id);\r\n        return \"User with id \" + id + \" has been removed\";\r\n    }\r\n    @PutMapping(\"/addFriend\")\r\n    @ResponseBody\r\n    public String addFriend(@RequestParam(name=\"name\")String name)\r\n    {\r\n        String returner = \"\";\r\n        for(int i=0;i<userList.size();i++)\r\n        {\r\n            if(userList.get(i).name == name)\r\n            {\r\n                friendList.add(userList.get(i));\r\n                returner = userList.get(i).name;\r\n            }\r\n        }\r\n        return returner;\r\n    }\r\n\r\n    public UserController()\r\n    {\r\n        User d1 = new User(\"test user\",  \"loveyou@gmail.com\", \"test\");\r\n        User d2 = new User(\"test user2\",  \"loveyou2@gmail.com\", \"test\");\r\n        userList.add(d1);\r\n        userList.add(d2);\r\n\r\n    }//curl -X POST -d '{}' -u admin:admin http://localhost:8080/changemenu\r\n    //curl -X POST -d '{\"type\":\"test\",\"priceEach\":6.0,\"description\":\"test description\"}' -u admin:admin https://localhost:8443/createCategory\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/example/demo/UserController.java	(revision 11fb65683b11f321120d47b4ad10037dd68abeaf)
++++ src/main/java/com/example/demo/UserController.java	(date 1587696100807)
+@@ -16,6 +16,33 @@
+         return userList.get(id).friends;
+     }
+ 
++    @GetMapping("/friends")
++    public String friends() {
++        return "friends";
++    }
++    @PutMapping("/addFriend")
++    @ResponseBody
++    public ArrayList<User> addFriend(@RequestParam(name="name")String name)
++    {
++
++        for(int i=0;i<userList.size();i++)
++        {
++            if(userList.get(i).name == name)
++            {
++                friendList.add(userList.get(i));
++            }
++        }
++        return friendList;
++    }
++    @GetMapping("/login")
++    public String login(){
++        return "login";
++    }
++    @GetMapping("/register")
++    public String register(){
++        return "register";
++    }
++
+ @GetMapping("/getAllUsers")//repurposed
+ @ResponseBody
+ public String getAllUsers()
+@@ -62,26 +89,12 @@
+         userList.remove(id);
+         return "User with id " + id + " has been removed";
+     }
+-    @PutMapping("/addFriend")
+-    @ResponseBody
+-    public String addFriend(@RequestParam(name="name")String name)
+-    {
+-        String returner = "";
+-        for(int i=0;i<userList.size();i++)
+-        {
+-            if(userList.get(i).name == name)
+-            {
+-                friendList.add(userList.get(i));
+-                returner = userList.get(i).name;
+-            }
+-        }
+-        return returner;
+-    }
++
+ 
+     public UserController()
+     {
+-        User d1 = new User("test user",  "loveyou@gmail.com", "test");
+-        User d2 = new User("test user2",  "loveyou2@gmail.com", "test");
++        User d1 = new User("d",  "loveyou@gmail.com", "test");
++        User d2 = new User("testuser2",  "loveyou2@gmail.com", "test");
+         userList.add(d1);
+         userList.add(d2);
+ 
+Index: src/main/resources/templates/Friends.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <title>Title</title>\r\n</head>\r\n<body>\r\n<script type=\"text/javascript\">\r\n    var x = document.getElementById(\"addFriends\");\r\n    new XMLHttpRequest()\r\n    let data = {'name':x[0],'email':x[1],'password':x[2]};\r\n    $.ajax({\r\n        url: \"Http://localhost:8080/addFriend/\"+ x[0],\r\n        type: 'POST',\r\n        crossDomain:true,\r\n        dataType: 'json',\r\n        contentType: 'application/json',\r\n        data: JSON.stringify(data),\r\n        success: (data) => {\r\n            console.log(data);\r\n        },\r\n        error: (er) => {\r\n            console.log(er);\r\n        }\r\n\r\n\r\n    });\r\n    </script>\r\n<form action=\"/addFriend\" id=\"addFriends\">\r\n    <label for=\"addf\">Add friend: </label>\r\n    <input id=\"addf\" placeholder=\"Username\" type=\"text\">\r\n    <input type=\"submit\" id=\"sub\" text=\"Add\">\r\n</form>\r\n\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/templates/Friends.html	(revision 11fb65683b11f321120d47b4ad10037dd68abeaf)
++++ src/main/resources/templates/Friends.html	(date 1587695901416)
+@@ -1,19 +1,19 @@
+ <!DOCTYPE html>
+-<html lang="en">
++<html lang="en" xmlns:th="http://www.thymeleaf.org">
+ <head>
+     <meta charset="UTF-8">
+     <title>Title</title>
+ </head>
+ <body>
+-<script type="text/javascript">
+-    var x = document.getElementById("addFriends");
++<!--<script type="text/javascript">
++    var x = document.getElementById("addf");
+     new XMLHttpRequest()
+-    let data = {'name':x[0],'email':x[1],'password':x[2]};
++    let data = x[0];
+     $.ajax({
+-        url: "Http://localhost:8080/addFriend/"+ x[0],
++        url: "Http://localhost:8080/addFriend?name=",
+         type: 'POST',
+         crossDomain:true,
+-        dataType: 'json',
++        dataType: "${param.type}",
+         contentType: 'application/json',
+         data: JSON.stringify(data),
+         success: (data) => {
+@@ -25,11 +25,11 @@
+ 
+ 
+     });
+-    </script>
++    </script>-->
+ <form action="/addFriend" id="addFriends">
+     <label for="addf">Add friend: </label>
+-    <input id="addf" placeholder="Username" type="text">
+-    <input type="submit" id="sub" text="Add">
++    <input id="addf" placeholder="Username" name="name" type="text">
++    <input type="submit" id="sub" text="Add" value="search">
+ </form>
+ 
+ </body>
+Index: src/main/java/com/example/demo/Security.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.demo;\r\n\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.http.HttpMethod;\r\nimport org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;\r\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\r\nimport org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;\r\n@Configuration\r\npublic class Security extends WebSecurityConfigurerAdapter {\r\n\r\n    @Override\r\n    protected void configure(AuthenticationManagerBuilder auth)throws Exception{\r\n        auth.inMemoryAuthentication()\r\n                .withUser(\"admin\").password(\"{noop}admin\").roles(\"ADMIN\");\r\n    }\r\n    @Override\r\n    protected void configure(HttpSecurity http) throws Exception{\r\n        http.httpBasic()\r\n                .and()\r\n                .authorizeRequests()\r\n                .antMatchers(HttpMethod.GET, \"/getAllUsers\").hasRole(\"ADMIN\")\r\n                .and()\r\n                .csrf().disable()\r\n                .formLogin().disable();\r\n        http.httpBasic()\r\n                .and()\r\n                .authorizeRequests()\r\n                .antMatchers(HttpMethod.GET, \"/getAllChat\").hasRole(\"ADMIN\")\r\n                .and()\r\n                .csrf().disable()\r\n                .formLogin().disable();\r\n       /* http.httpBasic()\r\n                .and()\r\n                .authorizeRequests()\r\n                .antMatchers(HttpMethod.POST,\"/createUser\").hasRole(\"ADMIN\")\r\n                .and()\r\n                .csrf().disable()\r\n                .formLogin().disable();*/\r\n       /* http.httpBasic()\r\n                .and()\r\n                .authorizeRequests()\r\n                .antMatchers(HttpMethod.PUT,\"/updateUser\").hasRole(\"ADMIN\")\r\n                .and()\r\n                .csrf().disable()\r\n                .formLogin().disable();*/\r\n        http.httpBasic()\r\n                .and()\r\n                .authorizeRequests()\r\n                .antMatchers(HttpMethod.DELETE,\"/deleteUser\").hasRole(\"ADMIN\")\r\n                .and()\r\n                .csrf().disable()\r\n                .formLogin().disable();\r\n        /*http.httpBasic()\r\n                .and()\r\n                .authorizeRequests()\r\n                .antMatchers(HttpMethod.DELETE,\"/getAllChat\").hasRole(\"ADMIN\")\r\n                .and()\r\n                .csrf().disable()\r\n                .formLogin().disable();*/\r\n       /* http.httpBasic()\r\n                .and()\r\n                .authorizeRequests()\r\n                .antMatchers(HttpMethod.DELETE,\"/createMessage\").hasRole(\"ADMIN\")\r\n                .and()\r\n                .csrf().disable()\r\n                .formLogin().disable();*/\r\n       /* http.httpBasic()\r\n                .and()\r\n                .authorizeRequests()\r\n                .antMatchers(HttpMethod.DELETE,\"/deleteMessage\").hasRole(\"ADMIN\")\r\n                .and()\r\n                .csrf().disable()\r\n                .formLogin().disable();*/\r\n        http.httpBasic()\r\n                .and()\r\n                .authorizeRequests()\r\n                .antMatchers(HttpMethod.POST,\"Review/newCategory\").hasRole(\"ADMIN\")\r\n                .and()\r\n                .authorizeRequests()\r\n                .antMatchers(HttpMethod.DELETE,\"Review/Delete/Category\").hasRole(\"ADMIN\")\r\n                .and()\r\n                .csrf().disable()\r\n                .formLogin().disable();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/example/demo/Security.java	(revision 11fb65683b11f321120d47b4ad10037dd68abeaf)
++++ src/main/java/com/example/demo/Security.java	(date 1587695901421)
+@@ -18,14 +18,14 @@
+         http.httpBasic()
+                 .and()
+                 .authorizeRequests()
+-                .antMatchers(HttpMethod.GET, "/getAllUsers").hasRole("ADMIN")
++                .antMatchers(HttpMethod.GET, "/getAl").hasRole("ADMIN")
+                 .and()
+                 .csrf().disable()
+                 .formLogin().disable();
+         http.httpBasic()
+                 .and()
+                 .authorizeRequests()
+-                .antMatchers(HttpMethod.GET, "/getAllChat").hasRole("ADMIN")
++                .antMatchers(HttpMethod.GET, "/get").hasRole("ADMIN")
+                 .and()
+                 .csrf().disable()
+                 .formLogin().disable();
+@@ -46,7 +46,7 @@
+         http.httpBasic()
+                 .and()
+                 .authorizeRequests()
+-                .antMatchers(HttpMethod.DELETE,"/deleteUser").hasRole("ADMIN")
++                .antMatchers(HttpMethod.DELETE,"/del").hasRole("ADMIN")
+                 .and()
+                 .csrf().disable()
+                 .formLogin().disable();
