@@ -333,7 +333,7 @@ class Lab3ApplicationTests {
         Assertions.assertEquals(HttpStatus.OK, r.getStatusCode());
     }
 
-    @Test
+    /*@Test
     void testNewPost1() {
         NewsFeed tester = new NewsFeed();
         NewsHolder testObject = new NewsHolder(4, "Myself", "Post body");
@@ -352,7 +352,7 @@ class Lab3ApplicationTests {
         NewsFeed tester = new NewsFeed();
         NewsHolder testObject = new NewsHolder(6, "Thyself", "Better prepare");
         Assertions.assertEquals(tester.newPost(testObject), "Your post has been added");
-    }
+    }*/
 
     @Test
     void testUpdatePost1() {
