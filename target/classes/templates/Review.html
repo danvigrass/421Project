@@ -69,6 +69,9 @@
         <form id="f4" th:action="@{Review/Delete/Category}" method="delete">
             <label>Delete: <input type="text" ID="Deleter"> <button type="button" id="button3">Delete</button></label>
         </form>
+        <p>
+            
+        </p>
     </aside>
     <p>
     <pre id="res"></pre>
@@ -152,7 +155,7 @@
                 bubba=bubba.split('"Rating":').join("<"+'Rating|').split('|').join(">");
                 bubba=bubba.split('"Text_writing":').join("<"+'Reveiw|').split('|').join(">");
                 bubba=bubba.split('"Game_Title":').join("<"+'Title of Game|').split('|').join(">");
-                bubba=bubba.split('"userID":').join("\n-----------------------------------------------------------------------------------------------------------------------\n<"+'posted by|').split('|').join(">");
+                bubba=bubba.split('"userID":').join("\n----------------------------------------------------------------------------------------------------------------------\n<"+'posted by|').split('|').join(">");
                 bubba=bubba.split('"rating":').join("<"+'Rating|').split('|').join(">");
                 bubba=bubba.split('"text_writing":').join("<"+'Reveiw|').split('|').join(">");
                 bubba=bubba.split('"game_Title":').join("<"+'Title of Game|').split('|').join(">");

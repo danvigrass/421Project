@@ -7,9 +7,14 @@ aside{
     position: sticky;
     top: 0;
     border: groove;
-
+    box-shadow: 1px 1px 5px #555;
 
 }
+input{
+    box-shadow: 0.5px 0.5px 3px #555 inset;
+}
+
+button{box-shadow: 2px 2px 7px #555}
 
 #res{padding-right: 800px;
     width:100px;
@@ -19,7 +24,7 @@ aside{
     line-height: 30px;
     background-color: white;
     overflow: scroll;
-
+    box-shadow: 1px 1px 5px #555 inset;
 }
 
 
