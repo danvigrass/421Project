@@ -1,17 +1,17 @@
 package com.example.demo;
 
 public class Review {
-    public int UserID;
+    public String UserID;
     public int Rating;
     public String Text_writing;
     public String Game_Title;
 
 
-    public int getUserID() {
+    public String getUserID() {
         return UserID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(String userID) {
         UserID = userID;
     }
 

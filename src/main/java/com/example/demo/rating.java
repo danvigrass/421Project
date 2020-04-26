@@ -56,6 +56,7 @@ public class rating {
         if (Reviews.containsKey(name)) {
             ArrayList<Review> answer =Reviews.get(name);
             Reviews.remove(name);
+            review.setUserID(uc.currentUser.getName());
             answer.add(review);
             Reviews.put(name,answer);
             uc.currentUser.getName();
