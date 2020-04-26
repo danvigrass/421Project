@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:position="http://www.w3.org/1999/xhtml">
 <head>
     <link rel="stylesheet" type ="text/css" th:href ="@{/ChatRoomStyle.css}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -43,7 +43,10 @@
 </head>
 <body style="background-color:#99aab5;">
 
-<div class ="ChatContainer">
+
+<br>
+<div  class ="ChatContainer">
+
     <div class ="ChatHeader">
         <h3>Welcome to the chatroom</h3>
 
@@ -54,41 +57,27 @@
         </form>
 <script>
 
-    $("#button1").click(function () {
-        $.ajax({
-            url: $("#newuser").attr("action")+"?name="+$("#text2").val(),
-            type: $("#newuser").attr("method"),
-            contentType: 'application/json',
-            success: function(data){
-            }
-        });
 
-    });
 </script>
 
  <!----EP2------->
        <form th:action="@{/chatroom/getChatUsers}" id="getUsers" method="get">
-           <input type="submit" value="Show User List">
+           <input type="button" id="button2" value="Show User List">
        </form>
+
+        <script>
+
+        </script>
 
 <!----EP3------->
         <form th:action="@{/chatroom/removeUser}" id="removeUser" method="delete">
             <input type ="text" name ="name" id ="text3" placeholder="Remove a User"/>
-            <input type="button" id="button2" value="remove">
+            <input type="button" id="button3" value="remove">
         </form>
 
         <script>
 
-            $("#button2").click(function () {
-                $.ajax({
-                    url: $("#removeUser").attr("action")+"?name="+$("#text3").val(),
-                    type: $("#removeUser").attr("method"),
-                    contentType: 'application/json',
-                    success: function(data){
-                    }
-                });
 
-            });
         </script>
 
 
@@ -110,20 +99,89 @@
 
         <script>
 
+
+
+          var namesList =[];
+
+
+
+            $("#button1").click(function () {
+                $.ajax({
+                    url: $("#newuser").attr("action")+"?name="+$("#text2").val(),
+                    type: $("#newuser").attr("method"),
+                    contentType: 'application/json',
+                    success: function(data){
+                        namesList.push(text2.value);
+                        listNode = document.getElementById('list'),
+                            liNode = document.createElement("LI"),
+                            txtNode = document.createTextNode("<Server> The user " + text2.value+ " has joined the chat.");
+                        liNode.appendChild(txtNode);
+                        listNode.appendChild(liNode);
+                        document.getElementById('text2').value ="";
+                    }
+                });
+
+            });
+
+
+
+
+            $("#button3").click(function () {
+                $.ajax({
+                    url: $("#removeUser").attr("action")+"?name="+$("#text3").val(),
+                    type: $("#removeUser").attr("method"),
+                    contentType: 'application/json',
+                    success: function(data){
+                        
+
+                        listNode = document.getElementById('list'),
+                            liNode = document.createElement("LI"),
+                            txtNode = document.createTextNode(data);
+                        liNode.appendChild(txtNode);
+                        listNode.appendChild(liNode);
+                        document.getElementById('text3').value ="";
+
+
+                    }
+                });
+
+            });
+
+
+            $("#button2").click(function () {
+                $.ajax({
+                    url: $("#getUsers").attr("action")+"?name="+$("#text2").val(),
+                    type: $("#getUsers").attr("method"),
+                    contentType: 'application/json',
+                    success: function(data){
+                        alert(data);
+                    }
+                });
+
+            });
+
+
             function addLi()
             {
                 var txtVal = document.getElementById('text').value;
-                if(txtVal ===""){
+                if(txtVal ==="")
+                {
                     alert("please enter data into the field.")
-            }else {
+                }
+                else if(namesList[0].value==="")
+                {
+                    alert("Please make sure you are signed in as a user")
+                }
+                else {
                     listNode = document.getElementById('list'),
                         liNode = document.createElement("LI"),
-                        txtNode = document.createTextNode("<" +text2.value+"> " + text.value);
+                        txtNode = document.createTextNode("<" + namesList[0]+"> " + text.value);
                     liNode.appendChild(txtNode);
                     listNode.appendChild(liNode);
                     document.getElementById('text').value ="";
                 }
             }
+
         </script>
     </div>
 </div>

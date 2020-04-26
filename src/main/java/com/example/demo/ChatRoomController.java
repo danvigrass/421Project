@@ -38,6 +38,7 @@ public class ChatRoomController {
         return userList;
     }
 
+
     @GetMapping("chatroom/getChatUser")
     @ResponseBody
     public String getChatUser(@RequestParam(name="id")int id)
@@ -47,22 +48,37 @@ public class ChatRoomController {
     }
 
 
-
     @DeleteMapping("chatroom/removeUser")
     @ResponseBody
     public String deleteMessage(@RequestParam(name="name")String name)
     {
-        int x = 0;
+        String x = "";
+        int flag = 0;
+
         for(int i =0;i<userList.size();i++)
         {
-            if (userList.get(i).equals(name)) {
+            if (userList.get(i).equals(name))
+            {
                 userList.remove(i);
-                x=i;
+                x = name;
+                flag = -1;
+                break;
+            }
+            else
+            {
+                flag = 0;
             }
         }
-        return "Message with id " + x + " has been removed";
-    }
+        if(flag==-1)
+        {
+            return "<Server> User with id " + x + " has been removed from the chat.";
+        }
+        else
+        {
+            return "<Server> No user found, nothing will be removed.";
+        }
 
+    }
 
     public ChatRoomController()
     {

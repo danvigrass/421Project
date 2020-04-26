@@ -37,6 +37,15 @@
 
 }
 
+.userContainer {
+
+    width: 200px;
+    height: 200px;
+    border: 2px solid #ddd;
+    padding-right:510px;
+
+}
+
 .ChatContainer > .ChatHeader {
     width: 98.7%;
     background: orangered;
