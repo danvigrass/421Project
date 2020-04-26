@@ -1,0 +1,84 @@
+Index: src/main/resources/templates/Newsfeed.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"en\" xmlns:th=\"http://www.thymeleaf.org\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <title>Title</title>\r\n    <link rel=\"stylesheet\" href=\"../static/NewsfeedStyle.css\">\r\n    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js\"></script>\r\n    <style>\r\n        .topnav {\r\n            list-style-type: none;\r\n            margin: 0;\r\n            padding: 0;\r\n            overflow: hidden;\r\n            background-color: #333;\r\n        }\r\n\r\n        .topnav a{\r\n            float: left;\r\n        }\r\n\r\n        .topnav a {\r\n            display: block;\r\n            color: white;\r\n            text-align: center;\r\n            padding: 14px 16px;\r\n            text-decoration: none;\r\n        }\r\n\r\n        .topnav a:hover:not(.active) {\r\n            background-color: #111;\r\n        }\r\n\r\n        .active {\r\n            background-color: #4CAF50;\r\n        }\r\n    </style>\r\n    <div class=\"topnav\">\r\n        <a  href=\"Menu.html\">Home</a>\r\n        <a href=\"Review.html\">Game Reviews</a>\r\n        <a class=\"active\" href=\"Newsfeed.html\">Newsfeed</a>\r\n        <a href=\"Chatroom.html\">Chatrooms</a>\r\n    </div>\r\n</head>\r\n<body>\r\n<form id=\"formGetPost\" th:action=\"@{Newsfeed/GetPostByName}\" method=\"get\">\r\n    <label>Get posts from a user: <input type=\"text\" ID=\"answer\"> <button type=\"button\" id=\"button\">Search</button></label>\r\n</form>\r\n\r\n<form id=\"formShowAllPosts\" th:action=\"@{Newsfeed/GetAll}\" method=\"get\">\r\n    <button type=\"submit\" id=\"showAllButton\">Show All Posts</button>\r\n</form>\r\n\r\n<div>Create a new post</div>\r\n<form id=\"formCreatePost\" th:action=\"@{Newsfeed/CreatePost}\" method=\"post\">\r\n    <label>Your name: <input type=\"text\" id=\"authorText\"> </label>\r\n    <div></div>\r\n    <label>What would you like to say?: <input type=\"text\" id=\"postBody\"></label>\r\n</form>\r\n\r\n<div class=\"newsHolder\">\r\n    <div class=\"newsPost\">\r\n        <strong>Poster</strong>\r\n        <p>Post content</p>\r\n        <p class=\"num\">Post #</p>\r\n    </div>\r\n    <div class=\"newsPost\">\r\n        <strong>Allen</strong>\r\n        <p>This is a post by me</p>\r\n        <p class=\"num\">1</p>\r\n    </div>\r\n    <div class=\"newsPost\">\r\n        <strong>Bob</strong>\r\n        <p>This is a post by bob</p>\r\n        <p class=\"num\">2</p>\r\n    </div>\r\n    <div class=\"newsPost\">\r\n        <strong>Someone Else</strong>\r\n        <p>I have no clue how to hook up to the backend</p>\r\n        <p class=\"num\">3</p>\r\n    </div>\r\n</div>\r\n\r\n<div>\r\n    <p id=\"result\"></p>\r\n</div>\r\n\r\n<script>\r\n    function getAllPostings(data) {\r\n        let htmlString = \"\"\r\n        for (let i in data) {\r\n            htmlString += \"<div class='newsHolder'>\"\r\n            htmlString += \"<strong>\"\r\n            htmlString += data[i].userName\r\n            htmlString += \"</strong>\"\r\n            htmlString += \"<p>\"\r\n            htmlString += data[i].messageBody\r\n            htmlString += \"</p>\"\r\n            htmlString += \"<p>\"\r\n            htmlString += data[i].ID\r\n            htmlString += \"</p>\"\r\n            htmlString += \"</div>\"\r\n        }\r\n        let container = DOM.getElementById(\"newsHolder\")\r\n        container.innerHTML = htmlString\r\n    }\r\n</script>\r\n\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/templates/Newsfeed.html	(revision 11fb65683b11f321120d47b4ad10037dd68abeaf)
++++ src/main/resources/templates/Newsfeed.html	(date 1587696464125)
+@@ -43,18 +43,19 @@
+ </head>
+ <body>
+ <form id="formGetPost" th:action="@{Newsfeed/GetPostByName}" method="get">
+-    <label>Get posts from a user: <input type="text" ID="answer"> <button type="button" id="button">Search</button></label>
++    <label>Get posts from a user: <input type="text" id="name"> <button type="button" id="button">Search</button></label>
+ </form>
+ 
+ <form id="formShowAllPosts" th:action="@{Newsfeed/GetAll}" method="get">
+-    <button type="submit" id="showAllButton">Show All Posts</button>
++    <button type="button" id="showAllButton">Show All Posts</button>
+ </form>
+ 
+ <div>Create a new post</div>
+ <form id="formCreatePost" th:action="@{Newsfeed/CreatePost}" method="post">
+-    <label>Your name: <input type="text" id="authorText"> </label>
++    <label>Your name: <input type="text" id="postAuthor"> </label>
+     <div></div>
+     <label>What would you like to say?: <input type="text" id="postBody"></label>
++    <label>Enter your ID: <input type="text" id="postID"></label>
+ </form>
+ 
+ <div class="newsHolder">
+@@ -85,7 +86,7 @@
+ </div>
+ 
+ <script>
+-    function getAllPostings(data) {
++    /*function getAllPostings(data) {
+         let htmlString = ""
+         for (let i in data) {
+             htmlString += "<div class='newsHolder'>"
+@@ -102,6 +103,21 @@
+         }
+         let container = DOM.getElementById("newsHolder")
+         container.innerHTML = htmlString
++    }*/
++
++    function getFormString() {
++        let jsonStr = '';
++        jsonStr += '{';
++        jsonStr += '"ID": ';
++        jsonStr += $("#postID").val() ;
++        jsonStr += ',';
++        jsonStr += '"userName": "';
++        jsonStr += $("#postAuthor").val() ;
++        jsonStr += '",';
++        jsonStr += '"messageBody": "';
++        jsonStr += $("#postBody").val() ;
++        jsonStr += '"}'
++        return  jsonStr;
+     }
+ </script>
+ 
+Index: src/main/java/com/example/demo/NewsFeed.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.demo;\r\n\r\nimport org.springframework.stereotype.Controller;\r\nimport org.springframework.web.bind.annotation.*;\r\n\r\nimport java.util.ArrayList;\r\n//Controller for NewsHolder class\r\n@Controller\r\npublic class NewsFeed {\r\n    private ArrayList<NewsHolder> postings;\r\n\r\n    public NewsFeed() {\r\n        postings = new ArrayList<>();\r\n        NewsHolder item0 = new NewsHolder(0, \"John\", \"I am John and I made this post\");\r\n        NewsHolder item1 = new NewsHolder(1, \"John\", \"I am also John and I posted this\");\r\n        NewsHolder item2 = new NewsHolder(2, \"Smith\", \"I am Smith, I am not John\");\r\n        NewsHolder item3 = new NewsHolder(3, \"What\", \"I have no clue what I am but I exist\");\r\n\r\n        postings.add(item0);\r\n        postings.add(item1);\r\n        postings.add(item2);\r\n        postings.add(item3);\r\n    }\r\n\r\n    @RequestMapping(\"NewsFeed/GetAll\")\r\n    @ResponseBody\r\n    public ArrayList<NewsHolder> getAllPostings() {\r\n        return postings;\r\n    }\r\n\r\n    @RequestMapping(\"NewsFeed/GetPostByName\")\r\n    @ResponseBody\r\n    public ArrayList<NewsHolder> getPostsFromUser(@RequestParam(name=\"userName\") String userName) {\r\n        ArrayList<NewsHolder> result = new ArrayList<>();\r\n        for (NewsHolder item : postings) {\r\n            if (item.getUserName().equals(userName)) {\r\n                result.add(item);\r\n            }\r\n        }\r\n        if (result.isEmpty()) {\r\n            return null;\r\n        }\r\n        else {\r\n            return result;\r\n        }\r\n    }\r\n\r\n    @RequestMapping(\"NewsFeed/CreatePost\")\r\n    @ResponseBody\r\n    public String newPost(@RequestBody NewsHolder item) {\r\n        postings.add(item);\r\n        return \"Your post has been added\";\r\n    }\r\n\r\n    @RequestMapping(\"NewsFeed/UpdatePost\")\r\n    @ResponseBody\r\n    public String updatePost(@RequestParam(name=\"index\") int index, @RequestParam(name=\"newText\") String newText) {\r\n        postings.get(index).setMessageBody(newText);\r\n        return \"Your post has been updated\";\r\n    }\r\n\r\n    @RequestMapping(\"NewsFeed/DeletePost\")\r\n    @ResponseBody\r\n    public String deletePost(@RequestParam(name=\"index\") int index) {\r\n        postings.remove(index);\r\n        return \"Your post has been deleted\";\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/example/demo/NewsFeed.java	(revision 11fb65683b11f321120d47b4ad10037dd68abeaf)
++++ src/main/java/com/example/demo/NewsFeed.java	(date 1587695509945)
+@@ -45,6 +45,11 @@
+         }
+     }
+ 
++    @GetMapping("/newsFeed")
++    public String newsFeed() {
++        return "NewsFeed";
++    }
++
+     @RequestMapping("NewsFeed/CreatePost")
+     @ResponseBody
+     public String newPost(@RequestBody NewsHolder item) {

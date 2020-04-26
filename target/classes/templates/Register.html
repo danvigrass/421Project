@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body style="background-color:#99aab5;">
+
+<!--<script type="text/javascript">
+    var x = document.getElementById("register");
+    new XMLHttpRequest()
+    let data = {'name':x[0],'email':x[1],'password':x[2]};
+    $.ajax({
+        url: "Http://localhost:8080/createUser",
+        type: 'POST',
+        crossDomain:true,
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: (data) => {
+            console.log(data);
+        },
+        error: (er) => {
+            console.log(er);
+        }
+    });
+</script> -->
+<form action="/createUser" id="register" method="post">
+    <label for="un">Username:</label><br>
+    <input type="text" id="un" name="name"><br>
+    <label for="em">Email:</label><br>
+    <input type="text" id="em" name="email"><br>
+    <label for="pw">Password:</label><br>
+    <input type="text" id="pw" name="pw"><br><br>
+    <input type="submit" value="Register">
+</form>
+</body>
+</html>
