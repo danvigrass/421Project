@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .topnav {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .topnav a{
+            float: left;
+        }
+
+        .topnav a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .topnav a:hover:not(.active) {
+            background-color: #111;
+        }
+
+        .active {
+            background-color: #4CAF50;
+        }
+    </style>
+    <div class="topnav">
+        <a  href="/menu">Home</a>
+        <a href="/review">Game Reviews</a>
+        <a  href="/NewsFeed">Newsfeed</a>
+        <a href="/chatroom">Chatrooms</a>
+        <a class="active" href="/friends">Friends</a>
+        <a href="/login">Login</a>
+    </div>
+</head>
+<body style="background-color:#99aab5;">
+
+<!--<script type="text/javascript">
+    var x = document.getElementById("addf");
+    new XMLHttpRequest()
+    let data = x[0];
+    $.ajax({
+        url: "Http://localhost:8080/addFriend?name=",
+        type: 'POST',
+        crossDomain:true,
+        dataType: "${param.type}",
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: (data) => {
+            console.log(data);
+        },
+        error: (er) => {
+            console.log(er);
+        }
+
+
+    });
+    </script>
+<script type="text/javascript">//to show list of friends when add is clicked
+    $('#sub').click(function() {
+        console.log(getFormString());
+        $.ajax({
+            url: "Http://localhost:8080/getFriends",
+            type: 'GET',
+            data: getFormString(),
+            // headers:{"Gamername":$("#Game_name").val()},
+            contentType: 'application/json',
+            success: function(data){
+                return alert(data);
+
+            }
+        });
+    });
+</script>-->
+<script>
+
+</script>
+<form action="/addFriend" id="addFriends" method="post">
+    <label for="addf">Add friend: </label>
+    <input id="addf" placeholder="Username" name="name" type="text">
+    <input type="submit" id="sub" text="Add" value="Search">
+</form>
+
+<form action="/getFriends" method="get">
+    <input type="submit" value="See list of all friends">
+</form>
+
+<h3></h3>
+
+</body>
+</html>
