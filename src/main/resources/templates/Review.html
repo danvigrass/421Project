@@ -76,6 +76,7 @@
 </div>
 
 <script>
+
     $.ajax({
         url: ("Review/newCategory")+"?Catname="+"world_of_war",
         type: "post",
@@ -146,8 +147,16 @@
 
             contentType: 'application/json',
             success: function(data){
-                document.getElementById("res").textContent=(JSON.stringify(data).split(",").join("\n")).split("{").join("#").split("}").join("\n\n").split("[").join("").split("]").join("");
-                
+                var bubba=(JSON.stringify(data).split(",").join("\n")).split("{").join("").split("}").join("\n----------------------------------------------------------------------------------------------------------------------\n").split("[").join("").split("]").join("");
+                bubba=bubba.split('"UserID":').join("<"+'posted by|').split('|').join(">");
+                bubba=bubba.split('"Rating":').join("<"+'Rating|').split('|').join(">");
+                bubba=bubba.split('"Text_writing":').join("<"+'Reveiw|').split('|').join(">");
+                bubba=bubba.split('"Game_Title":').join("<"+'Title of Game|').split('|').join(">");
+                bubba=bubba.split('"userID":').join("\n-----------------------------------------------------------------------------------------------------------------------\n<"+'posted by|').split('|').join(">");
+                bubba=bubba.split('"rating":').join("<"+'Rating|').split('|').join(">");
+                bubba=bubba.split('"text_writing":').join("<"+'Reveiw|').split('|').join(">");
+                bubba=bubba.split('"game_Title":').join("<"+'Title of Game|').split('|').join(">");
+                document.getElementById("res").textContent=bubba
                 //$("#res").append(JSON.stringify(data));
 
 
