@@ -54,10 +54,7 @@
 
 <div>Create a new post</div>
 <form id="formCreatePost" th:action="@{Newsfeed/CreatePost}" method="post">
-    <label>Your name: <input type="text" id="postAuthor"> </label>
-    <div></div>
     <label>What would you like to say?: <input type="text" id="postBody"></label>
-    <label>Enter your ID: <input type="text" id="postID"></label>
     <button type="button" id="newPostButton">Post</button>
 </form>
 
@@ -108,7 +105,7 @@
         container.innerHTML = htmlString
     }*/
 
-    function getFormString() {
+    /*function getFormString() {
         let jsonStr = '';
         jsonStr += '{';
         jsonStr += '"ID": ';
@@ -121,7 +118,7 @@
         jsonStr += $("#postBody").val() ;
         jsonStr += '"}'
         return  jsonStr;
-    }
+    }*/
 
     $("#newPostButton").click(function () {
         $.ajax({
