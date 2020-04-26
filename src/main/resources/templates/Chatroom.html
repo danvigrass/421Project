@@ -55,30 +55,19 @@
             <input type ="text" name ="name" id ="text2" placeholder="Add a User"/>
             <input type ="button"  id ="button1" value ="Add" />
         </form>
-<script>
 
-
-</script>
 
  <!----EP2------->
        <form th:action="@{/chatroom/getChatUsers}" id="getUsers" method="get">
            <input type="button" id="button2" value="Show User List">
        </form>
 
-        <script>
-
-        </script>
 
 <!----EP3------->
         <form th:action="@{/chatroom/removeUser}" id="removeUser" method="delete">
             <input type ="text" name ="name" id ="text3" placeholder="Remove a User"/>
             <input type="button" id="button3" value="remove">
         </form>
-
-        <script>
-
-
-        </script>
 
 
     </div>
@@ -103,8 +92,6 @@
 
           var namesList =[];
 
-
-
             $("#button1").click(function () {
                 $.ajax({
                     url: $("#newuser").attr("action")+"?name="+$("#text2").val(),
@@ -123,16 +110,12 @@
 
             });
 
-
-
-
             $("#button3").click(function () {
                 $.ajax({
                     url: $("#removeUser").attr("action")+"?name="+$("#text3").val(),
                     type: $("#removeUser").attr("method"),
                     contentType: 'application/json',
                     success: function(data){
-                        
 
                         listNode = document.getElementById('list'),
                             liNode = document.createElement("LI"),
@@ -154,7 +137,14 @@
                     type: $("#getUsers").attr("method"),
                     contentType: 'application/json',
                     success: function(data){
-                        alert(data);
+                        listNode = document.getElementById('list'),
+                            liNode = document.createElement("LI"),
+                            txtNode = document.createTextNode("<Server> The current users in the chat are: " +data+".");
+
+                        liNode.appendChild(txtNode);
+                        listNode.appendChild(liNode);
+
+                      // alert(data);
                     }
                 });
 

@@ -5,14 +5,36 @@
     <title>Login</title>
 </head>
 <body style="background-color:#99aab5;">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<form action="/login/send" method="get">
-    <label for="un">Username:</label><br>
-    <input type="text" id="un" name="un" ><br>
-    <label for="pw">Password:</label><br>
-    <input type="text" id="pw" name="pw"><br><br>
-    <input type="submit" value="Submit">
+
+
+<form th:action="@{/login/send}" id="theVal" method="post">
+    <label for="username">Username:</label><br>
+    <input type="text" id="username" name="un" ><br>
+    <label for="password">Password:</label><br>
+    <input type="text" id="password" name="pw"><br><br>
+    <input type="button" id="but3" value="Submit" />
 </form>
+
+<script>
+
+    $("#but3").click(function () {
+        $.ajax({
+            url: $("#theVal").attr("action")+"?un="+$("#username").val() +"&"+ "pw="+$("#password").val() ,
+            type: $("#theVal").attr("method"),
+            contentType: 'application/json',
+            success: function(data){
+                alert(data);
+            }
+        });
+
+    });
+
+
+</script>
+
+
 <a href="/register">Register</a>
 
 
