@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 @Controller
 public class ChatRoomController {
-    ArrayList<ChatRoom> ChatRoomChat = new ArrayList<ChatRoom>();
+    ArrayList<String> ChatRoomChat = new ArrayList<>();
     ArrayList<String> userList = new ArrayList<>();
     @Autowired UserController uc;
 
@@ -23,7 +23,7 @@ public class ChatRoomController {
     @ResponseBody
     public ArrayList<String> NewUser(@RequestParam(name="name")String name)
     {
-        for(int i =0;i<userList.size();i++)
+        for(int i =0; i<userList.size(); i++)
         {
             if(userList.get(i).equals(name))
             {
@@ -32,6 +32,13 @@ public class ChatRoomController {
         }
         userList.add(name);
         return userList;
+    }
+
+    @PostMapping("chatroom/currentUser")
+    @ResponseBody
+    public String CurrentUser()
+    {
+        return uc.currentUser.name;
     }
 
     @GetMapping("chatroom/getChatUsers")
@@ -50,6 +57,24 @@ public class ChatRoomController {
         return userList.get(id);
     }
 
+
+    @PostMapping("chatroom/getMessages")
+    @ResponseBody
+    public ArrayList<String> allChat()
+    {
+        return ChatRoomChat;
+    }
+
+    @PostMapping("chatroom/sendMessages")
+    @ResponseBody
+    public String sendChat(@RequestParam(name="name")String name)
+    {
+        String theFullLine = "<" + uc.currentUser.name + "> " + name;
+
+        ChatRoomChat.add(theFullLine);
+
+        return theFullLine;
+    }
 
     @DeleteMapping("chatroom/removeUser")
     @ResponseBody
@@ -86,7 +111,6 @@ public class ChatRoomController {
     public ChatRoomController()
     {
         ChatRoom c1 = new ChatRoom("test user", "ExampleText");
-        ChatRoomChat.add(c1);
 
     }
 
