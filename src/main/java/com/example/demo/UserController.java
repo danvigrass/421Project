@@ -127,8 +127,8 @@ public String getAllUsers()
     }
     public UserController()
     {
-        User d1 = new User("zach",  "dmv5262@psu.edu", "test");
-        User d2 = new User("dan",  "test@gmail.com", "test");
+        User d1 = new User("dan",  "dmv5262@psu.edu", "test");
+        User d2 = new User("zach",  "test@gmail.com", "test");
         User d3 = new User("avery", "test2@gmail.com", "test");
         User friend = new User("Hub representative", "Hubrep@GameHub.com", "test");
         d1.friends.add(friend);

@@ -56,7 +56,6 @@
 </form>
 
 <pre id="friendList">
-    Friends List
 </pre>
 <script>
 
@@ -70,7 +69,8 @@
             }
         });
     }));
-//["Hub representative|Hubrep@GameHub.com","aa|aa"]
+//"Hub representative|Hubrep@GameHub.com"
+    // "zach|dmv5262@psu.edu"
     $(document).ready($("#seeAll").click(function () {
         $.ajax({
             url: $("#getFriends").attr("action"),
@@ -78,7 +78,7 @@
             contentType: 'application/json',
             success: function(data){
                 var display=(JSON.stringify(data).split(",").join("\n")).split("{").join("").split("}").join("\n---------------\n").split("[").join("").split("]").join("");
-
+                //display = display.split("\"");
                 document.getElementById("friendList").textContent="Friends List\n"+display;
             }
         });
