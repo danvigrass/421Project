@@ -23,7 +23,7 @@ public class UserController {
         ArrayList<String> l = new ArrayList();
         for(int i=0;i<currentUser.friends.size();i++)
         {
-            l.add(currentUser.friends.get(i).name + "|" + currentUser.friends.get(i).email);
+            l.add("<strong>" + currentUser.friends.get(i).name + "</strong>" + "|" + currentUser.friends.get(i).email);
         }
         return l;
     }
@@ -44,8 +44,11 @@ public class UserController {
         {
             if(currentUser.friends.get(i).name.equals(name))
             {
-                returner = "That user is already on your Friends List";
-                return returner;
+                return "That user is already on your Friends List";
+            }
+            else if(currentUser.name.equals(name))
+            {
+                return "Can't add yourself as a friend.";
             }
         }
         for(int i=0;i<userList.size();i++)
@@ -119,11 +122,18 @@ public String getAllUsers()
 
     @PostMapping("/createUser")//repurposed
     @ResponseBody
-    public ArrayList<User> createUser(@RequestParam(name="name")String name,@RequestParam(name="email")String email, @RequestParam(name="pw")String pw)
+    public String createUser(@RequestParam(name="name")String name,@RequestParam(name="email")String email, @RequestParam(name="pw")String pw)
     {
+        for(int i=0;i<userList.size();i++)
+        {
+            if(userList.get(i).name.equals(name))
+            {
+                return "A User with that username already exists. Please try again.";
+            }
+        }
         User t = new User(name,email,pw);
         userList.add(t);
-        return userList;
+        return "User successfully created. Redirecting to login.";
     }
     public UserController()
     {

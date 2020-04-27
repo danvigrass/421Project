@@ -48,7 +48,7 @@
     <label>Get posts from a user: <input type="text" id="name"> <button type="button" id="searchButton">Search</button></label>
 </form>
 
-<form id="formShowAllPosts" th:action="@{NewsFeed/GetAll}" method="get">
+<form id="formShowAllPosts" th:action="@{NewsFeed/GetAll}" method="post">
     <button type="button" id="showAllButton">Show All Posts</button>
 </form>
 
@@ -82,7 +82,7 @@
     </div>
 </div>
 
-<div>
+<div id="posts">
     <p id="result"></p>
 </div>
 
@@ -138,7 +138,8 @@
             method: $("#formShowAllPosts").attr("method"),
             contentType: 'application/json',
             success: function (data) {
-                console.log(data)
+                var display=(JSON.stringify(data).split(",").join("\n")).split("{").join("").split("}").join("\n---------------\n").split("[").join("").split("]").join("");
+                document.getElementById("posts").textContent=display;
             }
         });
     });

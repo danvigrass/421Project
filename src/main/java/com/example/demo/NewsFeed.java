@@ -24,7 +24,7 @@ public class NewsFeed {
         postings.add(item3);
     }
 
-    @GetMapping("NewsFeed/GetAll")
+    @PostMapping("NewsFeed/GetAll")
     @ResponseBody
     public ArrayList<NewsHolder> getAllPostings() {
         return postings;

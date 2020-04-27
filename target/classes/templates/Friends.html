@@ -58,6 +58,7 @@
 <pre id="friendList">
 </pre>
 <script>
+    $( 'pre' ).text( $( 'pre' ).html() );
 
     $(document).ready($("#sub").click(function () {
         $.ajax({
@@ -79,7 +80,12 @@
             success: function(data){
                 var display=(JSON.stringify(data).split(",").join("\n")).split("{").join("").split("}").join("\n---------------\n").split("[").join("").split("]").join("");
                 //display = display.split("\"");
-                document.getElementById("friendList").textContent="Friends List\n"+display;
+                display=display.replace(/"|"/g, "\n");
+                display=display.split("|").join("\n");
+                //display=display.replace(/>/g,'&gt;');
+                //display=display.replace(/</g,'&lt;');
+                //display=display.replace(/\n/g,"");
+                document.getElementById("friendList").innerHTML="<h2>Friends List</h2>\n"+display;
             }
         });
     }));

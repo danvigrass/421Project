@@ -44,8 +44,11 @@
            type: $("#register").attr("method"),
            contentType: 'application/json',
            success: function(data){
-              alert("User successfully created, Redirecting to login");
-               window.location="http://localhost:8080/login";
+              alert(data);
+              if(data == "User successfully created. Redirecting to login.")
+              {
+                  window.location="http://localhost:8080/login";
+              }
            }
 
        });
