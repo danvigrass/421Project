@@ -15,7 +15,7 @@ public class NewsFeed {
         postings = new ArrayList<>();
         NewsHolder item0 = new NewsHolder(0, "John", "I am John and I made this post");
         NewsHolder item1 = new NewsHolder(1, "John", "I am also John and I posted this");
-        NewsHolder item2 = new NewsHolder(2, "Smith", "I am Smith, I am not John");
+        NewsHolder item2 = new NewsHolder(2, "Smith", "I am Smith; I am not John");
         NewsHolder item3 = new NewsHolder(3, "What", "I have no clue what I am but I exist");
 
         postings.add(item0);
@@ -26,8 +26,13 @@ public class NewsFeed {
 
     @PostMapping("NewsFeed/GetAll")
     @ResponseBody
-    public ArrayList<NewsHolder> getAllPostings() {
-        return postings;
+    public ArrayList<String> getAllPostings() {
+        ArrayList<String> l = new ArrayList();
+        for(int i=0;i<postings.size();i++)
+        {
+            l.add("<strong>"+postings.get(i).userName + "</strong>|" + postings.get(i).messageBody + "|" + postings.get(i).ID);
+        }
+        return l;
     }
 
     @RequestMapping("NewsFeed/GetPostByName")
@@ -55,8 +60,8 @@ public class NewsFeed {
     @PostMapping("NewsFeed/CreatePost")
     @ResponseBody
     public String newPost(@RequestParam("message") String message) {
-        int id = (int)uc.currentUser.getId();
-        String name = uc.currentUser.getName();
+        int id = postings.size();
+        String name = uc.currentUser.name;
         NewsHolder item = new NewsHolder(id, name, message);
         postings.add(item);
         return "Your post has been added";

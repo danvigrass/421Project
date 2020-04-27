@@ -3,9 +3,9 @@ package com.example.demo;
 //import java.time.LocalDateTime;
 
 public class NewsHolder {
-    private int ID;
-    private String userName;
-    private String messageBody;
+    public int ID;
+    public String userName;
+    public String messageBody;
     //private LocalDateTime timeStamp;
 
     public NewsHolder(int ID, String userName, String messageBody) {

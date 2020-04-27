@@ -31,10 +31,12 @@ public class UserController {
     public String mainmenu(){
         return "menu";
     }
+
     @GetMapping("/friends")
     public String friends() {
         return "friends";
     }
+
     @PostMapping("/friends/addFriend")
     @ResponseBody
     public String addFriend(@RequestParam(name="name")String name)

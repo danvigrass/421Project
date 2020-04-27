@@ -82,9 +82,9 @@
     </div>
 </div>
 
-<div id="posts">
+<pre id="posts">
     <p id="result"></p>
-</div>
+</pre>
 
 <script>
     /*function getAllPostings(data) {
@@ -139,7 +139,10 @@
             contentType: 'application/json',
             success: function (data) {
                 var display=(JSON.stringify(data).split(",").join("\n")).split("{").join("").split("}").join("\n---------------\n").split("[").join("").split("]").join("");
-                document.getElementById("posts").textContent=display;
+                display=display.replace(/"|"/g, "\n");
+                display=display.split("|").join("\n");
+                //display=display.split("\"").join("\n");
+                document.getElementById("posts").innerHTML=display;
             }
         });
     });
