@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -47,11 +48,11 @@
 <form th:action="@{/friends/addFriend}" id="addFriend" method="post">
     <label for="addf">Add friend: </label>
     <input id="addf" placeholder="Username" name="name" type="text">
-    <input type="submit" id="sub" value="Add Friend" >
+    <input type="button" id="sub" value="Add Friend" >
 </form>
 
 <form th:action="@{/getFriends}" id="getFriends" method="post">
-    <input type="submit" id="seeAll" value="See Friends List">
+    <input type="button" id="seeAll" value="See Friends List">
 </form>
 <script>
 
