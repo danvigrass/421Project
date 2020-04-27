@@ -80,20 +80,29 @@
         });
     });
 </script>-->
-<script>
-
-</script>
-<form action="/addFriend" id="addFriends" method="post">
+<form th:action="@{/friends/addFriend}" id="addFriend" method="post">
     <label for="addf">Add friend: </label>
     <input id="addf" placeholder="Username" name="name" type="text">
-    <input type="submit" id="sub" text="Add" value="Search">
+    <input type="submit" id="sub" text="Add" >
 </form>
 
 <form action="/getFriends" method="get">
-    <input type="submit" value="See list of all friends">
+    <input type="submit" id="seeAll" value="See list of all friends">
 </form>
+<script>
+    $("#sub").click(function (){
+        $.ajax({
+            url: $("#addFriend").attr("action")+"?name="+$("#addf").val(),
+            type: $("#addFriend").attr("method"),
+            contentType: 'application/json',
+            success: function(data){
+                alert(data);
+            }
 
-<h3></h3>
+        });
+    });
+</script>
 
 </body>
 </html>
+

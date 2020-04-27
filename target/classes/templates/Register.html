@@ -26,14 +26,30 @@
         }
     });
 </script> -->
-<form action="/createUser" id="register" method="post">
+<form th:action="@{/createUser}" id="register" method="post">
     <label for="un">Username:</label><br>
     <input type="text" id="un" name="name"><br>
     <label for="em">Email:</label><br>
     <input type="text" id="em" name="email"><br>
     <label for="pw">Password:</label><br>
     <input type="text" id="pw" name="pw"><br><br>
-    <input type="submit" value="Register">
+    <input type="submit" value="Register" id="regBut">
 </form>
+<a href="/login">Login</a>
+<script>
+    //url: $("#theVal").attr("action")+"?un="+$("#username").val() +"&"+ "pw="+$("#password").val()
+    $("#regBut").click(function (){
+       $.ajax({
+          url: $("#register").attr("action")+"?name="+$("#un").val()+"&email="+$("#em").val()+"&pw="+$("#pw").val(),
+           type: $("#register").attr("method"),
+           contentType: 'application/json',
+           success: function(data){
+              alert("User successfully created, Redirecting to login");
+               window.location="http://localhost:8080/login";
+           }
+
+       });
+    });
+</script>
 </body>
 </html>

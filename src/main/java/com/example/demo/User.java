@@ -15,8 +15,8 @@ public class User {
 
     public User()
     {
-        this.id=UUID;
         this.email = "";
+        this.friends = null;
     }
     public User(String name, String email, String pw) {
         this.name = name;

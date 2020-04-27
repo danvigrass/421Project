@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.ServletException;
 import java.util.ArrayList;
 import java.util.Date;
-//
+//NOW MAKE THE LIST OF FRIENDS DISPLAY WITH JSON
 @Controller
 public class UserController {
     ArrayList<User> userList = new ArrayList<User>();
@@ -30,18 +30,21 @@ public class UserController {
     public String friends() {
         return "friends";
     }
-    @PostMapping("/addFriend")
+    @PostMapping("/friends/addFriend")
     @ResponseBody
-    public ArrayList<User> addFriend(@RequestParam(name="name")String name)
+    public String addFriend(@RequestParam(name="name")String name)
     {
-        for(int i=0;i<userList.size();i++)
+        User t = findByName(name);
+        if(!t.name.equals(name))
         {
-            if(userList.get(i).name.equals(name));
-            {
-                currentUser.friends.add(userList.get(i));
-            }
+            return "Unable to find a user with that name, Please try again";
         }
-        return currentUser.friends;
+        else{
+            currentUser.friends.add(findByName(name));
+            //return currentUser.friends;
+            return name + " successfully added as a friend";
+        }
+
     }
     @GetMapping("/login")
     public String login(){
@@ -54,10 +57,10 @@ public class UserController {
 
     public User findByName(String n)
     {
-        User s = new User(null,null,null);
+        User s = new User("bad","bad","bad");
         for(int i=0;i<userList.size();i++)
         {
-            if(userList.get(i).name.equals(n));
+            if(userList.get(i).name.equals(n))
             {
                 return userList.get(i);
             }
@@ -77,6 +80,7 @@ public class UserController {
             {
                  returner = "Login Successful click Ok to continue";
                  currentUser = userList.get(i);
+                 break;
             }
         }
         return returner;
@@ -118,6 +122,10 @@ public String getAllUsers()
         User d1 = new User("zach",  "dmv5262@psu.edu", "test");
         User d2 = new User("dan",  "test@gmail.com", "test");
         User d3 = new User("avery", "test2@gmail.com", "test");
+        User friend = new User("Hub representative", "Hubrep@GameHub.com", "test");
+        d1.friends.add(friend);
+        d2.friends.add(friend);
+        d3.friends.add(friend);
         userList.add(d1);
         userList.add(d2);
         userList.add(d3);
