@@ -59,7 +59,7 @@
     <button type="button" id="newPostButton">Post</button>
 </form>
 
-<div class="newsHolder">
+<div class="newsHolder" id="holder">
     <div class="newsPost">
         <strong>Poster</strong>
         <p>Post content</p>
@@ -127,7 +127,8 @@
             type: $("#formCreatePost").attr("method"),
             contentType: 'application/json',
             success: function(data){
-                console.log(data)
+                console.log(data);
+                //$("#postBody").text="";
             }
         });
     });
