@@ -18,9 +18,14 @@ public class UserController {
 
     @PostMapping("/getFriends")
     @ResponseBody
-    public ArrayList<User> getFriends()
+    public ArrayList<String> getFriends()
     {
-        return currentUser.friends;
+        ArrayList<String> l = new ArrayList();
+        for(int i=0;i<currentUser.friends.size();i++)
+        {
+            l.add(currentUser.friends.get(i).name + "|" + currentUser.friends.get(i).email);
+        }
+        return l;
     }
     @GetMapping("/menu")
     public String mainmenu(){
@@ -35,6 +40,14 @@ public class UserController {
     public String addFriend(@RequestParam(name="name")String name)
     {
         String returner = "Unable to find an account with that name. Please try again";
+        for(int i=0;i<currentUser.friends.size();i++)
+        {
+            if(currentUser.friends.get(i).name.equals(name))
+            {
+                returner = "That user is already on your Friends List";
+                return returner;
+            }
+        }
         for(int i=0;i<userList.size();i++)
         {
             if(userList.get(i).name.equals(name))

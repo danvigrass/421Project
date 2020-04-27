@@ -54,6 +54,10 @@
 <form th:action="@{/getFriends}" id="getFriends" method="post">
     <input type="button" id="seeAll" value="See Friends List">
 </form>
+
+<pre id="friendList">
+    Friends List
+</pre>
 <script>
 
     $(document).ready($("#sub").click(function () {
@@ -66,14 +70,16 @@
             }
         });
     }));
-
+//["Hub representative|Hubrep@GameHub.com","aa|aa"]
     $(document).ready($("#seeAll").click(function () {
         $.ajax({
             url: $("#getFriends").attr("action"),
             type: $("#getFriends").attr("method"),
             contentType: 'application/json',
             success: function(data){
-                alert(data);
+                var display=(JSON.stringify(data).split(",").join("\n")).split("{").join("").split("}").join("\n---------------\n").split("[").join("").split("]").join("");
+
+                document.getElementById("friendList").textContent="Friends List\n"+display;
             }
         });
     }));
