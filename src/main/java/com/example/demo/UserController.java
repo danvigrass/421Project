@@ -16,7 +16,7 @@ public class UserController {
     User currentUser = new User();
 
 
-    @GetMapping("/getFriends")
+    @PostMapping("/getFriends")
     @ResponseBody
     public ArrayList<User> getFriends()
     {
@@ -34,16 +34,17 @@ public class UserController {
     @ResponseBody
     public String addFriend(@RequestParam(name="name")String name)
     {
-        User t = findByName(name);
-        if(!t.name.equals(name))
+        String returner = "Unable to find an account with that name. Please try again";
+        for(int i=0;i<userList.size();i++)
         {
-            return "Unable to find a user with that name, Please try again";
+            if(userList.get(i).name.equals(name))
+            {
+                currentUser.friends.add(userList.get(i));
+                returner = name + " was successfully added as a friend";
+                break;
+            }
         }
-        else{
-            currentUser.friends.add(findByName(name));
-            //return currentUser.friends;
-            return name + " successfully added as a friend";
-        }
+        return returner;
 
     }
     @GetMapping("/login")
@@ -58,13 +59,7 @@ public class UserController {
     public User findByName(String n)
     {
         User s = new User("bad","bad","bad");
-        for(int i=0;i<userList.size();i++)
-        {
-            if(userList.get(i).name.equals(n))
-            {
-                return userList.get(i);
-            }
-        }
+
         return s;
     }
 

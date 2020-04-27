@@ -38,7 +38,7 @@
 <a href="/login">Login</a>
 <script>
     //url: $("#theVal").attr("action")+"?un="+$("#username").val() +"&"+ "pw="+$("#password").val()
-    $("#regBut").click(function (){
+    $(document).ready($("#regBut").click(function (){
        $.ajax({
           url: $("#register").attr("action")+"?name="+$("#un").val()+"&email="+$("#em").val()+"&pw="+$("#pw").val(),
            type: $("#register").attr("method"),
@@ -49,7 +49,7 @@
            }
 
        });
-    });
+    }));
 </script>
 </body>
 </html>

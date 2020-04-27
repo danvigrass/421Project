@@ -43,6 +43,42 @@
 </head>
 <body style="background-color:#99aab5;">
 
+
+<form th:action="@{/friends/addFriend}" id="addFriend" method="post">
+    <label for="addf">Add friend: </label>
+    <input id="addf" placeholder="Username" name="name" type="text">
+    <input type="submit" id="sub" value="Add Friend" >
+</form>
+
+<form th:action="@{/getFriends}" id="getFriends" method="post">
+    <input type="submit" id="seeAll" value="See Friends List">
+</form>
+<script>
+
+    $(document).ready($("#sub").click(function () {
+        $.ajax({
+            url: $("#addFriend").attr("action")+"?name="+$("#addf").val(),
+            type: $("#addFriend").attr("method"),
+            contentType: 'application/json',
+            success: function(data){
+                alert(data);
+            }
+        });
+    }));
+
+    $(document).ready($("#seeAll").click(function () {
+        $.ajax({
+            url: $("#getFriends").attr("action"),
+            type: $("#getFriends").attr("method"),
+            contentType: 'application/json',
+            success: function(data){
+                alert(data);
+            }
+        });
+    }));
+
+
+</script>
 <!--<script type="text/javascript">
     var x = document.getElementById("addf");
     new XMLHttpRequest()
@@ -80,29 +116,6 @@
         });
     });
 </script>-->
-<form th:action="@{/friends/addFriend}" id="addFriend" method="post">
-    <label for="addf">Add friend: </label>
-    <input id="addf" placeholder="Username" name="name" type="text">
-    <input type="submit" id="sub" text="Add" >
-</form>
-
-<form action="/getFriends" method="get">
-    <input type="submit" id="seeAll" value="See list of all friends">
-</form>
-<script>
-    $("#sub").click(function (){
-        $.ajax({
-            url: $("#addFriend").attr("action")+"?name="+$("#addf").val(),
-            type: $("#addFriend").attr("method"),
-            contentType: 'application/json',
-            success: function(data){
-                alert(data);
-            }
-
-        });
-    });
-</script>
-
 </body>
 </html>
 
