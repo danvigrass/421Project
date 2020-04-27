@@ -23,7 +23,7 @@ public class UserController {
         ArrayList<String> l = new ArrayList();
         for(int i=0;i<currentUser.friends.size();i++)
         {
-            l.add("<strong>" + currentUser.friends.get(i).name + "</strong>" + "|" + currentUser.friends.get(i).email);
+            l.add("<strong style=\"font-size:large;\">" + currentUser.friends.get(i).name + "</strong>" + "|" + currentUser.friends.get(i).email);
         }
         return l;
     }
