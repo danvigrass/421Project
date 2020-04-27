@@ -101,16 +101,16 @@ public class UserController {
 
 
 
-@GetMapping("/getAllUsers")//repurposed
+@PostMapping("/getAllUsers")//repurposed
 @ResponseBody
-public String getAllUsers()
+public ArrayList<String> getAllUsers()
 {
-    String returner = "";
+    ArrayList<String> l = new ArrayList<String>();
     for(int i = 0; i< userList.size(); i++)
     {
-        returner = returner.concat(userList.get(i).name) + ", ";
+        l.add("<strong>"+userList.get(i).name+"</strong>");
     }
-    return returner;
+    return l;
 }
 
     @GetMapping("/getUser")//repurposed
@@ -119,7 +119,6 @@ public String getAllUsers()
     {
         return userList.get(val);
     }
-//"type":"pizza","priceEach":6.0,"description":"surpreme pizza"
 
 
     @PostMapping("/createUser")//repurposed

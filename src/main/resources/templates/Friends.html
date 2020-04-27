@@ -40,13 +40,14 @@
         <a href="/chatroom">Chatrooms</a>
         <a class="active" href="/friends">Friends</a>
         <a href="/login">Login</a>
-    </div>
+    </div>\
+    <br>
 </head>
 <body style="background-color:#99aab5;">
 
 
 <form th:action="@{/friends/addFriend}" id="addFriend" method="post">
-    <label for="addf">Add friend: </label>
+    <label for="addf">Enter a username to add as a friend: </label>
     <input id="addf" placeholder="Username" name="name" type="text">
     <input type="button" id="sub" value="Add Friend" >
 </form>
@@ -55,10 +56,33 @@
     <input type="button" id="seeAll" value="See Friends List">
 </form>
 
-<pre id="friendList">
-</pre>
+<form th:action="@{/getAllUsers}" id="getAllUsers" method="post">
+    <input type="button" id="allUsers" value="List of valid usernames">
+</form>
+<table width="100%">
+
+    <tr>
+        <th><pre id="friendList"></pre></th>
+        <th><pre id="allList" ></pre></th>
+    </tr>
+</table>
+
 <script>
     $( 'pre' ).text( $( 'pre' ).html() );
+
+    $(document).ready($("#allUsers").click(function () {
+        $.ajax({
+            url: $("#getAllUsers").attr("action"),
+            type: $("#getAllUsers").attr("method"),
+            contentType: 'application/json',
+            success: function (data) {
+                var display=(JSON.stringify(data).split(",").join("\n")).split("{").join("").split("}").join("\n---------------\n").split("[").join("").split("]").join("");
+                //display = display.split("\"");
+                display=display.replace(/"|"/g, "\n");
+                document.getElementById("allList").innerHTML="<h2>All Registered Usernames</h2>\n"+display;
+            }
+        });
+    }));
 
     $(document).ready($("#sub").click(function () {
         $.ajax({
